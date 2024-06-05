@@ -16,8 +16,10 @@
             <option value="income" {% if entry.type == 'income' %}selected{% endif %}>Income</option>
             <option value="expense" {% if entry.type == 'expense' %}selected{% endif %}>Expense</option>
         </select>
+        <label for="month">Month:</label>
+        <input type="month" id="month" name="month" value="{{ entry.month }}" required>
         <button type="submit">Update</button>
     </form>
-    <a href="{{ url_for('routes.index') }}">Cancel</a>
+    <a href="{{ url_for('routes.index', month=entry.month) }}">Cancel</a>
 </body>
 </html>
