@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Entry</title>
+</head>
+<body>
+    <h1>Edit Entry</h1>
+    <form action="{{ url_for('routes.update_entry', id=entry.id) }}" method="post">
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" value="{{ entry.description }}">
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" name="amount" step="0.01" value="{{ entry.amount }}">
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>

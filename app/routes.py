@@ -20,3 +20,4 @@ def add_entry():
     )
     db.commit()
     return redirect(url_for('routes.index'))
+

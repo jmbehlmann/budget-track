@@ -15,7 +15,10 @@
     </form>
     <ul>
         {% for entry in entries %}
-            <li>{{ entry.description }}: ${{ entry.amount }}</li>
+            <li>
+                {{ entry.description }}: ${{ entry.amount }}
+                <a href="{{ url_for('routes.edit_entry', id=entry.id) }}">Edit</a>
+            </li>
         {% endfor %}
     </ul>
 </body>
