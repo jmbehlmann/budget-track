@@ -7,16 +7,24 @@ bp = Blueprint('routes', __name__)
 def index():
     db = get_db()
     entries = db.execute('SELECT id, description, amount FROM budget_entry').fetchall()
-    return render_template('index.html', entries=entries)
+    current_balance = db.execute('SELECT SUM(amount) FROM budget_entry WHERE type = "income"').fetchone()[0]
+    expenses = db.execute('SELECT SUM(amount) FROM budget_entry WHERE type = "expense"').fetchone()[0]
+    if current_balance is None:
+        current_balance = 0
+    if expenses is None:
+        expenses = 0
+    balance = current_balance - expenses
+    return render_template('index.html', entries=entries, balance=balance)
 
 @bp.route('/add', methods=['POST'])
 def add_entry():
     description = request.form['description']
     amount = request.form['amount']
+    entry_type = request.form['type']
     db = get_db()
     db.execute(
-        'INSERT INTO budget_entry (description, amount) VALUES (?, ?)',
-        (description, amount)
+        'INSERT INTO budget_entry (description, amount, type) VALUES (?, ?)',
+        (description, amount, entry_type)
     )
     db.commit()
     return redirect(url_for('routes.index'))
@@ -31,10 +39,11 @@ def edit_entry(id):
 def update_entry(id):
     description = request.form['description']
     amount = request.form['amount']
+    entry_type = request.form['type']
     db = get_db()
     db.execute(
-        'UPDATE budget_entry SET description = ?, amount = ? WHERE id = ?',
-        (description, amount, id)
+        'UPDATE budget_entry SET description = ?, amount = ?, type = ? WHERE id = ?',
+        (description, amount, entry_type, id)
     )
     db.commit()
     return redirect(url_for('routes.index'))
