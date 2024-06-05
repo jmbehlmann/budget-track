@@ -22,7 +22,7 @@
     <ul>
         {% for entry in entries %}
             <li>
-                {{ entry.description }}: ${{ entry.amount }} ({{ entry.type }})
+                {{ entry.description }}: ${{ entry.amount }} {{ entry.type }}
                 <a href="{{ url_for('routes.edit_entry', id=entry.id) }}">Edit</a>
                 <a href="{{ url_for('routes.delete_entry', id=entry.id) }}" onclick="return confirm('Are you sure you want to delete this entry?');">Delete</a>
             </li>

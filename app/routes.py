@@ -23,7 +23,7 @@ def add_entry():
     entry_type = request.form['type']
     db = get_db()
     db.execute(
-        'INSERT INTO budget_entry (description, amount, type) VALUES (?, ?)',
+        'INSERT INTO budget_entry (description, amount, type) VALUES (?, ?, ?)',
         (description, amount, entry_type)
     )
     db.commit()
