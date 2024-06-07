@@ -3,6 +3,6 @@ CREATE TABLE budget_entry (
     description TEXT NOT NULL,
     amount REAL NOT NULL,
     type TEXT NOT NULL,
-    month TEXT NOT NULL, -- Format: 'YYYY-MM'
+    month TEXT NOT NULL,
     created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
