@@ -31,5 +31,12 @@
     </ul>
     <a href="{{ url_for('routes.index', month=(month.split('-')[0] + '-' + '%02d' % (int(month.split('-')[1]) - 1))) }}">Previous Month</a>
     <a href="{{ url_for('routes.index', month=(month.split('-')[0] + '-' + '%02d' % (int(month.split('-')[1]) + 1))) }}">Next Month</a>
+    <h2>-----</h2>
+    <h3>Budget</h3>
+    <ul>
+        <li>rent: $400</li>
+        <li>food: $300</li>
+        <li>loan: $600</li>
+    </ul>
 </body>
 </html>
