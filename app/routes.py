@@ -23,7 +23,7 @@ def index():
     return render_template('index.html', entries=entries, balance=balance, month=month, int=int)
 
 
-
+# entries
 @bp.route('/add', methods=['POST'])
 def add_entry():
     description = request.form['description']
@@ -65,3 +65,20 @@ def delete_entry(id):
     db.execute('DELETE FROM budget_entry WHERE id = ?', (id,))
     db.commit()
     return redirect(url_for('routes.index', month=month))
+
+@bp.route('/add_category', methods=['POST'])
+def add_category():
+    name = request.form['name']
+    db = get_db()
+    db.execute('INSERT INTO category (name) VALUES (?)', (id,))
+    db.commit()
+    return redirect(url_for('routes.index'))
+
+@bp.route('/delete_category/<int:id>')
+def delete_category(id):
+    db = get_db()
+    db.execute('DELETE FROM category WHERE id = ?', (id,))
+    db.commit()
+    return redirect(url_for('routes.index'))
+
+
