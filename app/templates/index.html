@@ -6,8 +6,7 @@
 </head>
 <body>
     <h1>My Budget for {{ month }}</h1>
-    <h3>Total Balance: ${{ total_balance }}</h3>
-    <h3>This month's Balance: ${{ balance }}</h3>
+    <h3>Balance: ${{ balance }}</h3>
     <form action="{{ url_for('routes.add_entry') }}" method="post">
         <label for="description">Description:</label>
         <input type="text" id="description" name="description" required>

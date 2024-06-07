@@ -7,53 +7,20 @@ bp = Blueprint('routes', __name__)
 def get_current_month():
     return datetime.now().strftime('%Y-%m')
 
-def get_previous_month(month):
-    year, month = map(int, month.split('-'))
-    if month == 1:
-        year -= 1
-        month = 12
-    else:
-        month -= 1
-    return f"{year}-{month:02d}"
-
-
 
 @bp.route('/')
 def index():
-    current_month = request.args.get('month', get_current_month())
-    previous_month = get_previous_month(current_month)
-
+    month = request.args.get('month', get_current_month())
     db = get_db()
-
-    # Get total income and expenses for previous month
-    previous_income = db.execute('SELECT SUM(amount) FROM budget_entry WHERE type = "income" AND month = ?', (previous_month,)).fetchone()[0]
-    previous_expenses = db.execute('SELECT SUM(amount) FROM budget_entry WHERE type = "expense" AND month = ?', (previous_month,)).fetchone()[0]
-
-    if previous_income is None:
-        previous_income = 0
-    if previous_expenses is None:
-        previous_expenses = 0
-
-    previous_balance = previous_income - previous_expenses
-
-    # Get total income and expenses for current month
-    current_income = db.execute('SELECT SUM(amount) FROM budget_entry WHERE type = "income" AND month = ?', (current_month,)).fetchone()[0]
-    current_expenses = db.execute('SELECT SUM(amount) FROM budget_entry WHERE type = "expense" AND month = ?', (current_month,)).fetchone()[0]
-
-    if current_income is None:
-        current_income = 0
-    if current_expenses is None:
-        current_expenses = 0
-
-    current_balance = current_income - current_expenses
-
-    # Calculate total balance for current month including the remaining balance from the previous month
-    total_balance = previous_balance + current_balance
-
-    # Fetch entries for the current month
-    entries = db.execute('SELECT id, description, amount, type FROM budget_entry WHERE month = ?', (current_month,)).fetchall()
-
-    return render_template('index.html', entries=entries, balance=current_balance, total_balance=total_balance, month=current_month, int=int)
+    entries = db.execute('SELECT id, description, amount, type FROM budget_entry WHERE month = ?', (month,)).fetchall()
+    income = db.execute('SELECT SUM(amount) FROM budget_entry WHERE type = "income" AND month = ?', (month,)).fetchone()[0]
+    expenses = db.execute('SELECT SUM(amount) FROM budget_entry WHERE type = "expense" AND month = ?', (month,)).fetchone()[0]
+    if income is None:
+        income = 0
+    if expenses is None:
+        expenses = 0
+    balance = income - expenses
+    return render_template('index.html', entries=entries, balance=balance, month=month, int=int)
 
 
 
