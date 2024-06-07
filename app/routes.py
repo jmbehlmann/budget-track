@@ -24,61 +24,37 @@ def index():
 
 
 # entries
-@bp.route('/add', methods=['POST'])
-def add_entry():
-    description = request.form['description']
-    amount = request.form['amount']
-    entry_type = request.form['type']
-    month = request.form['month']
+
+@bp.route('/entries', methods=['GET', 'POST'])
+def entries():
     db = get_db()
-    db.execute(
-        'INSERT INTO budget_entry (description, amount, type, month) VALUES (?, ?, ?, ?)',
-        (description, amount, entry_type, month)
-    )
-    db.commit()
-    return redirect(url_for('routes.index', month=month))
+    if request.method == 'POST':
+        description = request.form['description']
+        amount = request.form['amount']
+        entry_type = request.form['type']
+        category_id = request.form['category_id']
+        month = request.form['month']
+        db.execute('INSERT INTO entry (description, amount, type, category_id, month) VALUES (?, ?, ?, ?, ?)',
+                   (description, amount, entry_type, category_id, month))
+        db.commit()
+        return redirect(url_for('routes.entries'))
+    entries = db.execute('SELECT id, description, amount, type, category_id, month FROM entry').fetchall()
+    categories = db.execute('SELECT id, name FROM category').fetchall()
+    return render_template('entries.html', entries=entries, categories=categories)
 
-@bp.route('/edit/<int:id>')
-def edit_entry(id):
+@bp.route('/entries/<int:id>', methods=['PATCH', 'DELETE'])
+def modify_entry(id):
     db = get_db()
-    entry = db.execute('SELECT id, description, amount, type, month FROM budget_entry WHERE id = ?', (id,)).fetchone()
-    return render_template('edit.html', entry=entry)
-
-@bp.route('/update/<int:id>', methods=['POST'])
-def update_entry(id):
-    description = request.form['description']
-    amount = request.form['amount']
-    entry_type = request.form['type']
-    month = request.form['month']
-    db = get_db()
-    db.execute(
-        'UPDATE budget_entry SET description = ?, amount = ?, type = ?, month = ? WHERE id = ?',
-        (description, amount, entry_type, month, id)
-    )
-    db.commit()
-    return redirect(url_for('routes.index', month=month))
-
-@bp.route('/delete/<int:id>')
-def delete_entry(id):
-    db = get_db()
-    month = db.execute('SELECT month FROM budget_entry WHERE id = ?', (id,)).fetchone()[0]
-    db.execute('DELETE FROM budget_entry WHERE id = ?', (id,))
-    db.commit()
-    return redirect(url_for('routes.index', month=month))
-
-@bp.route('/add_category', methods=['POST'])
-def add_category():
-    name = request.form['name']
-    db = get_db()
-    db.execute('INSERT INTO category (name) VALUES (?)', (id,))
-    db.commit()
-    return redirect(url_for('routes.index'))
-
-@bp.route('/delete_category/<int:id>')
-def delete_category(id):
-    db = get_db()
-    db.execute('DELETE FROM category WHERE id = ?', (id,))
-    db.commit()
-    return redirect(url_for('routes.index'))
-
-
+    if request.method == 'PATCH':
+        description = request.form['description']
+        amount = request.form['amount']
+        entry_type = request.form['type']
+        category_id = request.form['category_id']
+        month = request.form['month']
+        db.execute('UPDATE entry SET description = ?, amount = ?, type = ?, category_id = ?, month = ? WHERE id = ?',
+                   (description, amount, entry_type, category_id, month, id))
+        db.commit()
+    elif request.method == 'DELETE':
+        db.execute('DELETE FROM entry WHERE id = ?', (id,))
+        db.commit()
+    return redirect(url_for('routes.entries'))
