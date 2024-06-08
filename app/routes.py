@@ -2,6 +2,14 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 from datetime import datetime, timedelta
 from .db import get_db
 
+
+# TODO figure out about int=int
+# TODO finish the modify or edit entries routes and index stuff
+# TODO
+# TODO
+
+
+
 bp = Blueprint('routes', __name__)
 
 def get_current_month():
@@ -23,7 +31,7 @@ def index():
     return render_template('index.html', entries=entries, balance=balance, month=month, int=int)
 
 
-# entries
+# entries routes
 
 @bp.route('/entries', methods=['GET', 'POST'])
 def entries():
@@ -59,3 +67,7 @@ def modify_entry(id):
         db.execute('DELETE FROM entry WHERE id = ?', (id,))
         db.commit()
     return redirect(url_for('routes.entries'))
+
+# budgets routes
+
+# categories routes
