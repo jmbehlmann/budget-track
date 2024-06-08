@@ -12,9 +12,9 @@ def get_current_month():
 def index():
     month = request.args.get('month', get_current_month())
     db = get_db()
-    entries = db.execute('SELECT id, description, amount, type FROM budget_entry WHERE month = ?', (month,)).fetchall()
-    income = db.execute('SELECT SUM(amount) FROM budget_entry WHERE type = "income" AND month = ?', (month,)).fetchone()[0]
-    expenses = db.execute('SELECT SUM(amount) FROM budget_entry WHERE type = "expense" AND month = ?', (month,)).fetchone()[0]
+    entries = db.execute('SELECT id, description, amount, type FROM entry WHERE month = ?', (month,)).fetchall()
+    income = db.execute('SELECT SUM(amount) FROM entry WHERE type = "income" AND month = ?', (month,)).fetchone()[0]
+    expenses = db.execute('SELECT SUM(amount) FROM entry WHERE type = "expense" AND month = ?', (month,)).fetchone()[0]
     if income is None:
         income = 0
     if expenses is None:
@@ -27,6 +27,7 @@ def index():
 
 @bp.route('/entries', methods=['GET', 'POST'])
 def entries():
+    month = request.args.get('month', get_current_month())
     db = get_db()
     if request.method == 'POST':
         description = request.form['description']
@@ -40,7 +41,7 @@ def entries():
         return redirect(url_for('routes.entries'))
     entries = db.execute('SELECT id, description, amount, type, category_id, month FROM entry').fetchall()
     categories = db.execute('SELECT id, name FROM category').fetchall()
-    return render_template('entries.html', entries=entries, categories=categories)
+    return render_template('index.html', entries=entries, categories=categories, month=month, int=int)
 
 @bp.route('/entries/<int:id>', methods=['PATCH', 'DELETE'])
 def modify_entry(id):
