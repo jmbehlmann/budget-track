@@ -80,7 +80,7 @@ def index_categories():
     categories = Category.query.all()
     return render_template('/categories/index.html', categories=categories)
 
-@bp.route('/categories/add', methods=['GET', 'POST'])
+@bp.route('/categories/add', methods=['POST'])
 def add_category():
     if request.method == 'POST':
         name = request.form['name']
