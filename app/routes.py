@@ -2,7 +2,6 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 from datetime import datetime, timedelta
 from .models import db, Entry
 
-# TODO figure out about int=int
 # TODO finish the modify or edit entries routes and index stuff
 # TODO
 # TODO
