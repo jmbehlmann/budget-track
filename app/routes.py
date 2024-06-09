@@ -91,6 +91,14 @@ def add_category():
     else:
         return render_template('categories/add.html')
 
+@bp.route('/categories/<int:category_id>/delete', methods=['POST'])
+def delete_category(category_id):
+    category = Category.query.get_or_404(category_id)
+    db.session.delete(category)
+    db.session.commit()
+    flash('Category deleted successfully', 'success')
+    return redirect(url_for('routes.index_categories'))
+
 # description
 # amount
 # entry_type
