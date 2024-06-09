@@ -77,7 +77,7 @@ def delete_entry(entry_id):
 
 @bp.route('/categories')
 def index_categories():
-    categories = Entry.query.all()
+    categories = Category.query.all()
     return render_template('/categories/index.html', categories=categories)
 
 @bp.route('/categories/add', methods=['GET', 'POST'])
