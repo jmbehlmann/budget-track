@@ -20,7 +20,6 @@ def get_current_month():
 def home():
     month = request.args.get('month', get_current_month())
     db = get_db()
-    # Fetch entries
     entries = db.execute('SELECT id, description, amount, type, month FROM entry WHERE month = ?', (month,)).fetchall()
     return render_template('home.html', entries=entries, month=month)
 

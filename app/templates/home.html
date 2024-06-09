@@ -11,6 +11,14 @@
 <div>
     <h1>Test home</h1>
     <h3>{{ month }}</h3>
+    <h2>Entries</h2>
+    <ul>
+        {% for entry in entries %}
+            <li>{{ entry.description }}: ${{ entry.amount }} ({{ entry.type }})</li>
+        {% else %}
+            <li>No entries found.</li>
+        {% endfor %}
+    </ul>
 </div>
 
 </body>
