@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+  <h1>Entry Details</h1>
+  <div>
+    <label>Description:</label>
+    <span>{{ entry.description }}</span>
+  </div>
+  <div>
+    <label>Amount:</label>
+    <span>{{ entry.amount }}</span>
+  </div>
+  <div>
+    <label>Type:</label>
+    <span>{{ entry.entry_type }}</span>
+  </div>
+  <div>
+    <label>Month:</label>
+    <span>{{ entry.month }}</span>
+  </div>
+  <div>
+    <a href="{{ url_for('routes.edit_entry', entry_id=entry.id) }}">Edit</a>
+  </div>
+  <div>
+    <a href="{{ url_for('routes.entries_index') }}">Back to Entries</a>
+  </div>
+</div>
+{% endblock %}

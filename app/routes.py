@@ -2,8 +2,8 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 from datetime import datetime, timedelta
 from .models import db, Entry
 
-# TODO finish the modify or edit entries routes and index stuff
-# TODO
+# TODO do entries need a show action?
+# TODO add date to entries
 # TODO
 
 
@@ -27,6 +27,11 @@ def home():
 def entries_index():
     entries = Entry.query.all()
     return render_template('/entries/index.html', entries=entries)
+
+@bp.route('/entries/<int:entry_id>')
+def show_entry(entry_id):
+    entry = Entry.query.get_or_404(entry_id)
+    return render_template('entries/show.html', entry=entry)
 
 @bp.route('/entries/add', methods=['GET', 'POST'])
 def add_entry():
