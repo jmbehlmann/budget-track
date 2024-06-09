@@ -1,8 +1,29 @@
 {% extends "base.html" %}
 
 {% block content %}
+
 <div>
-  <h2>Edit Entry {{entry.id}} </h2>
+    <h1>Edit Entry</h1>
+    <form method="POST">
+        <div>
+            <label for="description">Description:</label>
+            <input type="text" id="description" name="description" value="{{ entry.description }}">
+        </div>
+        <div>
+            <label for="amount">Amount:</label>
+            <input type="text" id="amount" name="amount" value="{{ entry.amount }}">
+        </div>
+        <div>
+          <label for="entry_type">Type:</label>
+          <select id="entry_type" name="entry_type">
+            <option value="expense" {% if entry.entry_type == 'expense' %} selected {% endif %}>Expense</option>
+            <option value="income" {% if entry.entry_type == 'income' %} selected {% endif %}>Income</option>
+          </select><br><br>
+        </div>
+        <div>
+            <input type="submit" value="Update Entry">
+        </div>
+    </form>
 </div>
 
 {% endblock %}

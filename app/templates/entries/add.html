@@ -3,18 +3,25 @@
 {% block content %}
 <div>
   <h2>Add Entry</h2>
-
-  <form method="POST", action="{{ url_for('routes.add_entry') }}">
-    <label for="description">Description:</label>
-    <input type="text" id="description" name="description"><br>
-    <label for="amount">Amount:</label>
-    <input type="text" id="amount" name="amount"><br>
-    <label for="entry_type">Type:</label>
-    <select id="entry_type" name="entry_type">
-      <option value="expense">Expense</option>
-      <option value="income">Income</option>
-    </select><br><br>
-    <button type="submit">Submit</button>
+  <form method="POST" action="{{ url_for('routes.add_entry') }}">
+    <div>
+      <label for="description">Description:</label>
+      <input type="text" id="description" name="description">
+    </div>
+    <div>
+      <label for="amount">Amount:</label>
+      <input type="text" id="amount" name="amount">
+    </div>
+    <div>
+      <label for="entry_type">Type:</label>
+      <select id="entry_type" name="entry_type">
+        <option value="expense">Expense</option>
+        <option value="income">Income</option>
+      </select>
+    </div>
+    <div>
+      <button type="submit">Submit</button>
+    </div>
+  </form>
 </div>
-
 {% endblock %}
