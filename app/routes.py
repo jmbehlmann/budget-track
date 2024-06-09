@@ -20,15 +20,11 @@ def get_current_month():
 def index():
     month = request.args.get('month', get_current_month())
     db = get_db()
-    entries = db.execute('SELECT id, description, amount, type FROM entry WHERE month = ?', (month,)).fetchall()
-    income = db.execute('SELECT SUM(amount) FROM entry WHERE type = "income" AND month = ?', (month,)).fetchone()[0]
-    expenses = db.execute('SELECT SUM(amount) FROM entry WHERE type = "expense" AND month = ?', (month,)).fetchone()[0]
-    if income is None:
-        income = 0
-    if expenses is None:
-        expenses = 0
-    balance = income - expenses
-    return render_template('index.html', entries=entries, balance=balance, month=month, int=int)
+    # Fetch entries, categories, and budgets
+    entries = db.execute('SELECT id, description, amount, type, month, category_id FROM entry WHERE month = ?', (month,)).fetchall()
+    categories = db.execute('SELECT id, name FROM category').fetchall()
+    budgets = db.execute('SELECT id, category_id, amount FROM budget WHERE month = ?', (month,)).fetchall()
+    return render_template('index.html', entries=entries, categories=categories, budgets=budgets, month=month)
 
 
 # entries routes
