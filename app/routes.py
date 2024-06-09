@@ -17,12 +17,12 @@ def get_current_month():
 
 
 @bp.route('/')
-def index():
+def home():
     month = request.args.get('month', get_current_month())
     db = get_db()
-    # Fetch entries, categories, and budgets
+    # Fetch entries
     entries = db.execute('SELECT id, description, amount, type, month FROM entry WHERE month = ?', (month,)).fetchall()
-    return render_template('index.html', entries=entries, month=month)
+    return render_template('home.html', entries=entries, month=month)
 
 
 # entries routes
