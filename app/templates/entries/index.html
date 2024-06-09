@@ -8,8 +8,13 @@
     <ul>
         {% for entry in entries %}
             <li>
-                {{ entry.description }}: ${{ entry.amount }} ({{ entry.entry_type }})
-                <a href="{{ url_for('routes.edit_entry', entry_id=entry.id) }}">Edit</a>
+                <span>
+                  {{ entry.description }}:
+                  ${{ entry.amount }}
+                  ({{ entry.entry_type }})
+                  {{ entry.date}}
+                  <a href="{{ url_for('routes.edit_entry', entry_id=entry.id) }}">Edit</a>
+                </span>
             </li>
         {% else %}
             <li>No entries found.</li>
