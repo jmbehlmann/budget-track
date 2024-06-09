@@ -60,7 +60,7 @@ def edit_entry(entry_id):
     else:
         return render_template('entries/edit.html', entry=entry)
 
-@bp.route('/entries/<int:entry_id/delete')
+@bp.route('/entries/<int:entry_id>/delete', methods=['POST'])
 def delete_entry(entry_id):
     entry = Entry.query.get_or_404(entry_id)
     db.session.delete(entry)
