@@ -29,40 +29,32 @@ def index():
 
 # entries routes
 
-@bp.route('/entries', methods=['GET', 'POST'])
-def entries():
-    month = request.args.get('month', get_current_month())
+@bp.route('/entries')
+def entries_index():
     db = get_db()
-    if request.method == 'POST':
-        description = request.form['description']
-        amount = request.form['amount']
-        entry_type = request.form['type']
-        category_id = request.form['category_id']
-        month = request.form['month']
-        db.execute('INSERT INTO entry (description, amount, type, category_id, month) VALUES (?, ?, ?, ?, ?)',
-                   (description, amount, entry_type, category_id, month))
-        db.commit()
-        return redirect(url_for('routes.entries'))
-    entries = db.execute('SELECT id, description, amount, type, category_id, month FROM entry').fetchall()
-    categories = db.execute('SELECT id, name FROM category').fetchall()
-    return render_template('index.html', entries=entries, categories=categories, month=month, int=int)
+    entries = db.execute('SELECT * FROM entry').fetchall()
+    return render_template('/entries/index.html', entries=entries)
 
-@bp.route('/entries/<int:id>', methods=['PATCH', 'DELETE'])
-def modify_entry(id):
-    db = get_db()
-    if request.method == 'PATCH':
-        description = request.form['description']
-        amount = request.form['amount']
-        entry_type = request.form['type']
-        category_id = request.form['category_id']
-        month = request.form['month']
-        db.execute('UPDATE entry SET description = ?, amount = ?, type = ?, category_id = ?, month = ? WHERE id = ?',
-                   (description, amount, entry_type, category_id, month, id))
-        db.commit()
-    elif request.method == 'DELETE':
-        db.execute('DELETE FROM entry WHERE id = ?', (id,))
-        db.commit()
-    return redirect(url_for('routes.entries'))
+# @bp.route('/entries', methods=['POST'])
+# def create_entry():
+#     description = request.form['description']
+#     amount = float(request.form['amount'])
+#     entry_type = request.form['type']
+#     category_id = request.form.get('category_id')
+#     month = request.form['month']
+#     db = get_db()
+#     db.execute(
+#         'INSERT INTO entry (description, amount, type, month, category_id) VALUES (?, ?, ?, ?, ?)',
+#         (description, amount, entry_type, month, category_id)
+#     )
+#     db.commit()
+#     return redirect(url_for('routes.index', month=month))
+
+# @bp.route('/entries/<int:id>')
+# def show_entry(id):
+#     db = get_db()
+#     entry = db.execute('SELECT id, description, amount, type, month, category_id FROM entry WHERE id = ?', (id,)).fetchone()
+#     return render_template('/entries/show.html', entry=entry)
 
 # budgets routes
 
