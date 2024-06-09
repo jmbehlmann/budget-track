@@ -49,7 +49,6 @@ def edit_entry(entry_id):
         entry.description = request.form['description']
         entry.amount = request.form['amount']
         entry.entry_type = request.form['entry_type']
-        entry.month = request.form['month']
         db.session.commit()
         flash('Entry updated successfully', 'success')
         return redirect(url_for('routes.entries_index'))
