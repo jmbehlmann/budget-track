@@ -6,6 +6,8 @@
     <h1>Home</h1>
     <h3>{{ month }}</h3>
     <h2>Entries</h2>
+    <a href="{{url_for('routes.add_entry')}}">Add Entry</a>
+
     <ul>
         {% for entry in entries %}
             <li>{{ entry.description }}: ${{ entry.amount }} ({{ entry.entry_type }})</li>
