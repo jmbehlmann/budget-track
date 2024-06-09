@@ -53,7 +53,7 @@ def edit_entry(entry_id):
         flash('Entry updated successfully', 'success')
         return redirect(url_for('routes.entries_index'))
     else:
-        return render_template('edit_entry.html', entry=entry)
+        return render_template('entries/edit.html', entry=entry)
 
 
 # budgets routes
