@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from datetime import datetime, UTC
-from .models import db, Entry
+from .models import db, Entry, Category
 
 # TODO do entries need a show action?
 # TODO add date to entries
@@ -24,7 +24,7 @@ def home():
 # entries routes
 
 @bp.route('/entries')
-def entries_index():
+def index_entries():
     entries = Entry.query.all()
     return render_template('/entries/index.html', entries=entries)
 
@@ -44,7 +44,7 @@ def add_entry():
         entry = Entry(description = description, amount = amount, entry_type = entry_type, month = month, date=date)
         db.session.add(entry)
         db.session.commit()
-        return redirect(url_for('routes.entries_index'))
+        return redirect(url_for('routes.index_entries'))
     else:
         return render_template('entries/add.html')
 
@@ -58,7 +58,7 @@ def edit_entry(entry_id):
         entry.date = datetime.strptime(request.form['date'], '%Y-%m-%d').date()
         db.session.commit()
         flash('Entry updated successfully', 'success')
-        return redirect(url_for('routes.entries_index'))
+        return redirect(url_for('routes.index_entries'))
     else:
         return render_template('entries/edit.html', entry=entry)
 
@@ -68,12 +68,28 @@ def delete_entry(entry_id):
     db.session.delete(entry)
     db.session.commit()
     flash('Entry deleted successfully', 'success')
-    return redirect(url_for('routes.entries_index'))
+    return redirect(url_for('routes.index_entries'))
 
 
 # budgets routes
 
 # categories routes
+
+@bp.route('/categories')
+def index_categories():
+    categories = Entry.query.all()
+    return render_template('/categories/index.html', categories=categories)
+
+@bp.route('/categories/add', methods=['GET', 'POST'])
+def add_category():
+    if request.method == 'POST':
+        name = request.form['name']
+        category = Category(name = name)
+        db.session.add(category)
+        db.session.commit()
+        return redirect(url_for('routes.index_categories'))
+    else:
+        return render_template('categories/add.html')
 
 # description
 # amount
