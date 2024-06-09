@@ -2,6 +2,6 @@ CREATE TABLE IF NOT EXISTS entry (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     description TEXT NOT NULL,
     amount REAL NOT NULL,
-    type TEXT NOT NULL,
+    entry_type TEXT NOT NULL,
     month TEXT NOT NULL
 );

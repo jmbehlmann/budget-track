@@ -1,7 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from datetime import datetime, timedelta
-from .db import get_db
-
+from .models import db, Entry
 
 # TODO figure out about int=int
 # TODO finish the modify or edit entries routes and index stuff
@@ -19,8 +18,7 @@ def get_current_month():
 @bp.route('/')
 def home():
     month = request.args.get('month', get_current_month())
-    db = get_db()
-    entries = db.execute('SELECT id, description, amount, type, month FROM entry WHERE month = ?', (month,)).fetchall()
+    entries = Entry.query.all()
     return render_template('home.html', entries=entries, month=month)
 
 
@@ -28,8 +26,7 @@ def home():
 
 @bp.route('/entries')
 def entries_index():
-    db = get_db()
-    entries = db.execute('SELECT * FROM entry').fetchall()
+    entries = Entry.query.all()
     return render_template('/entries/index.html', entries=entries)
 
 
