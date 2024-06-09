@@ -10,9 +10,13 @@
 
 <div>
     <h1>Test</h1>
-
-        <p>{{ entries.first() }}</p>
-
+    <ul>
+        {% for entry in entries %}
+            <li>{{ entry.description }}: ${{ entry.amount }} ({{ entry.type }})</li>
+        {% else %}
+            <li>No entries found.</li>
+        {% endfor %}
+    </ul>
 </div>
 
 </body>
