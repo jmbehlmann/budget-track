@@ -21,10 +21,8 @@ def index():
     month = request.args.get('month', get_current_month())
     db = get_db()
     # Fetch entries, categories, and budgets
-    entries = db.execute('SELECT id, description, amount, type, month, category_id FROM entry WHERE month = ?', (month,)).fetchall()
-    categories = db.execute('SELECT id, name FROM category').fetchall()
-    budgets = db.execute('SELECT id, category_id, amount FROM budget WHERE month = ?', (month,)).fetchall()
-    return render_template('index.html', entries=entries, categories=categories, budgets=budgets, month=month)
+    entries = db.execute('SELECT id, description, amount, type, month FROM entry WHERE month = ?', (month,)).fetchall()
+    return render_template('index.html', entries=entries, month=month)
 
 
 # entries routes
@@ -40,12 +38,11 @@ def entries_index():
 #     description = request.form['description']
 #     amount = float(request.form['amount'])
 #     entry_type = request.form['type']
-#     category_id = request.form.get('category_id')
 #     month = request.form['month']
 #     db = get_db()
 #     db.execute(
-#         'INSERT INTO entry (description, amount, type, month, category_id) VALUES (?, ?, ?, ?, ?)',
-#         (description, amount, entry_type, month, category_id)
+#         'INSERT INTO entry (description, amount, type, month, category_id) VALUES (?, ?, ?, ?)',
+#         (description, amount, entry_type, month)
 #     )
 #     db.commit()
 #     return redirect(url_for('routes.index', month=month))
