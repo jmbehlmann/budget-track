@@ -39,14 +39,17 @@ def add_entry():
         description = request.form['description']
         amount = request.form['amount']
         entry_type = request.form['entry_type']
+        category_id = request.form['category']
         date = datetime.strptime(request.form['date'], '%Y-%m-%d').date()
         month = request.args.get('month', get_current_month())
-        entry = Entry(description = description, amount = amount, entry_type = entry_type, month = month, date=date)
+        category = Category.query.get(category_id)
+        entry = Entry(description = description, amount = amount, entry_type = entry_type, category = category, month = month, date=date)
         db.session.add(entry)
         db.session.commit()
         return redirect(url_for('routes.index_entries'))
     else:
-        return render_template('entries/add.html')
+        categories = Category.query.all()
+        return render_template('entries/add.html', categories=categories)
 
 @bp.route('/entries/<int:entry_id>/edit', methods=['GET', 'POST'])
 def edit_entry(entry_id):
@@ -55,6 +58,7 @@ def edit_entry(entry_id):
         entry.description = request.form['description']
         entry.amount = request.form['amount']
         entry.entry_type = request.form['entry_type']
+        entry.category = request.form['category']
         entry.date = datetime.strptime(request.form['date'], '%Y-%m-%d').date()
         db.session.commit()
         flash('Entry updated successfully', 'success')

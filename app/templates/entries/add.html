@@ -24,6 +24,14 @@
       </select>
     </div>
     <div>
+      <label for="category">Category:</label>
+      <select id="category" name="category">
+        {% for category in categories %}
+          <option value="{{ category.id }}">{{ category.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div>
       <button type="submit">Submit</button>
     </div>
   </form>
