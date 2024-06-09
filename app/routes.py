@@ -28,7 +28,7 @@ def entries_index():
     entries = Entry.query.all()
     return render_template('/entries/index.html', entries=entries)
 
-@bp.route('/entries/add', methods=['POST'])
+@bp.route('/entries/add', methods=['GET', 'POST'])
 def add_entry():
     if request.method == 'POST':
         description = request.form['description']
@@ -38,7 +38,24 @@ def add_entry():
         entry = Entry(description = description, amount = amount, entry_type = entry_type, month = month)
         db.session.add(entry)
         db.session.commit()
-        return redirect('/')
+        return redirect(url_for('routes.entries_index'))
+    else:
+        return render_template('entries/add.html')
+
+@bp.route('/entries/<int:entry_id>/edit', methods=['GET', 'POST'])
+def edit_entry(entry_id):
+    entry = Entry.query.get_or_404(entry_id)
+    if request.method == 'POST':
+        entry.description = request.form['description']
+        entry.amount = request.form['amount']
+        entry.entry_type = request.form['entry_type']
+        entry.month = request.form['month']
+        db.session.commit()
+        flash('Entry updated successfully', 'success')
+        return redirect(url_for('routes.entries_index'))
+    else:
+        return render_template('edit_entry.html', entry=entry)
+
 
 # budgets routes
 
