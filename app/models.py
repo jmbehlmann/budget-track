@@ -1,5 +1,5 @@
 from app import db
-from datetime import datetime
+from datetime import datetime, timezone
 
 class Entry(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -7,4 +7,4 @@ class Entry(db.Model):
     amount = db.Column(db.Float, nullable=False)
     entry_type = db.Column(db.String(10), nullable=False)
     month = db.Column(db.String(7), nullable=False)
-    date = db.Column(db.Date, default=datetime.utcnow)
+    date = db.Column(db.Date, default=datetime.now(timezone.utc))

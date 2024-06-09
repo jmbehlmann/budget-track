@@ -15,6 +15,10 @@
               <input type="text" id="amount" name="amount" value="{{ entry.amount }}">
           </div>
           <div>
+              <label for="date">Date:</label>
+              <input type="date" id="date" name="date" value="{{ entry.date }}">
+          </div>
+          <div>
             <label for="entry_type">Type:</label>
             <select id="entry_type" name="entry_type">
               <option value="expense" {% if entry.entry_type == 'expense' %} selected {% endif %}>Expense</option>

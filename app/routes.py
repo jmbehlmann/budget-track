@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from datetime import datetime, timedelta
+from datetime import datetime, UTC
 from .models import db, Entry
 
 # TODO do entries need a show action?
@@ -39,8 +39,9 @@ def add_entry():
         description = request.form['description']
         amount = request.form['amount']
         entry_type = request.form['entry_type']
+        date = datetime.strptime(request.form['date'], '%Y-%m-%d').date()
         month = request.args.get('month', get_current_month())
-        entry = Entry(description = description, amount = amount, entry_type = entry_type, month = month)
+        entry = Entry(description = description, amount = amount, entry_type = entry_type, month = month, date=date)
         db.session.add(entry)
         db.session.commit()
         return redirect(url_for('routes.entries_index'))
@@ -54,6 +55,7 @@ def edit_entry(entry_id):
         entry.description = request.form['description']
         entry.amount = request.form['amount']
         entry.entry_type = request.form['entry_type']
+        entry.date = datetime.strptime(request.form['date'], '%Y-%m-%d').date()
         db.session.commit()
         flash('Entry updated successfully', 'success')
         return redirect(url_for('routes.entries_index'))
