@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 from datetime import datetime, timezone
 from .models import db, Transaction, Category
 
-# TODO rename entries to transactions
+# TODO
 # TODO
 # TODO
 
@@ -101,7 +101,3 @@ def delete_category(category_id):
     flash('Category deleted successfully', 'success')
     return redirect(url_for('routes.index_categories'))
 
-# description
-# amount
-# entry_type
-# month

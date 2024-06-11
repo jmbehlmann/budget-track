@@ -2,28 +2,28 @@
 
 {% block content %}
 <div>
-  <h1>Entry Details</h1>
+  <h1>transaction Details</h1>
   <div>
     <label>Description:</label>
-    <span>{{ entry.description }}</span>
+    <span>{{ transaction.description }}</span>
   </div>
   <div>
     <label>Amount:</label>
-    <span>{{ entry.amount }}</span>
+    <span>{{ transaction.amount }}</span>
   </div>
   <div>
     <label>Type:</label>
-    <span>{{ entry.entry_type }}</span>
+    <span>{{ transaction.transaction_type }}</span>
   </div>
   <div>
     <label>Month:</label>
-    <span>{{ entry.month }}</span>
+    <span>{{ transaction.month }}</span>
   </div>
   <div>
-    <a href="{{ url_for('routes.edit_entry', entry_id=entry.id) }}">Edit</a>
+    <a href="{{ url_for('routes.edit_transaction', transaction_id=transaction.id) }}">Edit</a>
   </div>
   <div>
-    <a href="{{ url_for('routes.index_entries') }}">Back to Entries</a>
+    <a href="{{ url_for('routes.index_transactions') }}">Back to transactions</a>
   </div>
 </div>
 {% endblock %}
