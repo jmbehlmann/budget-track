@@ -56,18 +56,19 @@ def edit_transaction(transaction_id):
         transaction.description = request.form['description']
         transaction.amount = request.form['amount']
         transaction.transaction_type = request.form['transaction_type']
-        transaction.category = request.form['category']
+        transaction.category_id = request.form['category']
         transaction.date = datetime.strptime(request.form['date'], '%Y-%m-%d').replace(tzinfo=timezone.utc)
         db.session.commit()
         flash('Transaction updated successfully', 'success')
         return redirect(url_for('routes.index_transactions'))
     else:
-        return render_template('transactions/edit.html', transaction=transaction)
+        categories = Category.query.all()
+        return render_template('transactions/edit.html', transaction=transaction, categories=categories)
 
 @bp.route('/transactions/<int:transaction_id>/delete', methods=['POST'])
 def delete_transaction(transaction_id):
-    Transaction = Transaction.query.get_or_404(transaction_id)
-    db.session.delete(Transaction)
+    transaction = Transaction.query.get_or_404(transaction_id)
+    db.session.delete(transaction)
     db.session.commit()
     flash('Transaction deleted successfully', 'success')
     return redirect(url_for('routes.index_transactions'))

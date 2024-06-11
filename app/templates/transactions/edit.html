@@ -1,40 +1,44 @@
 {% extends "base.html" %}
 
 {% block content %}
-
 <div>
-    <h1>Edit transaction</h1>
+  <h2>Edit Transaction</h2>
+  <form method="POST" action="{{ url_for('routes.edit_transaction', transaction_id=transaction.id) }}">
     <div>
-      <form method="POST">
-          <div>
-              <label for="description">Description:</label>
-              <input type="text" id="description" name="description" value="{{ transaction.description }}">
-          </div>
-          <div>
-              <label for="amount">Amount:</label>
-              <input type="text" id="amount" name="amount" value="{{ transaction.amount }}">
-          </div>
-          <div>
-              <label for="date">Date:</label>
-              <input type="date" id="date" name="date" value="{{ transaction.date }}">
-          </div>
-          <div>
-            <label for="transaction_type">Type:</label>
-            <select id="transaction_type" name="transaction_type">
-              <option value="expense" {% if transaction.transaction_type == 'expense' %} selected {% endif %}>Expense</option>
-              <option value="income" {% if transaction.transaction_type == 'income' %} selected {% endif %}>Income</option>
-            </select><br><br>
-          </div>
-          <div>
-              <input type="submit" value="Update transaction">
-          </div>
-      </form>
+      <label for="description">Description:</label>
+      <input type="text" id="description" name="description" value="{{ transaction.description }}">
     </div>
     <div>
-      <form action="{{ url_for('routes.delete_transaction', transaction_id=transaction.id) }}" method="POST">
-        <button type="submit">Delete</button>
-      </form>
+      <label for="amount">Amount:</label>
+      <input type="text" id="amount" name="amount" value="{{ transaction.amount }}">
     </div>
+    <div>
+      <label for="date">Date:</label>
+      <input type="date" id="date" name="date" value="{{ transaction.date.strftime('%Y-%m-%d') }}">
+    </div>
+    <div>
+      <label for="transaction_type">Type:</label>
+      <select id="transaction_type" name="transaction_type">
+        <option value="expense" {% if transaction.transaction_type == 'expense' %}selected{% endif %}>Expense</option>
+        <option value="income" {% if transaction.transaction_type == 'income' %}selected{% endif %}>Income</option>
+      </select>
+    </div>
+    <div>
+      <label for="category">Category:</label>
+      <select id="category" name="category">
+        {% for category in categories %}
+          <option value="{{ category.id }}" {% if category.id == transaction.category.id %}selected{% endif %}>{{ category.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div>
+      <button type="submit">Submit</button>
+    </div>
+  </form>
+  <div>
+  <form action="{{ url_for('routes.delete_transaction', transaction_id=transaction.id) }}" method="POST">
+    <button type="submit">Delete</button>
+  </form>
 </div>
-
+</div>
 {% endblock %}
