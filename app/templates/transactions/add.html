@@ -2,8 +2,8 @@
 
 {% block content %}
 <div>
-  <h2>Add Entry</h2>
-  <form method="POST" action="{{ url_for('routes.add_entry') }}">
+  <h2>Add transaction</h2>
+  <form method="POST" action="{{ url_for('routes.add_transaction') }}">
     <div>
       <label for="description">Description:</label>
       <input type="text" id="description" name="description">
@@ -17,8 +17,8 @@
       <input type="date" id="date" name="date">
     </div>
     <div>
-      <label for="entry_type">Type:</label>
-      <select id="entry_type" name="entry_type">
+      <label for="transaction_type">Type:</label>
+      <select id="transaction_type" name="transaction_type">
         <option value="expense">Expense</option>
         <option value="income">Income</option>
       </select>

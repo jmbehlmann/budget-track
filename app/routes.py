@@ -21,58 +21,56 @@ def home():
     return render_template('home.html', transactions=transactions, month=month)
 
 
-# entries routes
+# transactions routes
 
-@bp.route('/entries')
-def index_entries():
-    entries = Entry.query.all()
-    return render_template('/entries/index.html', entries=entries)
+@bp.route('/transactions')
+def index_transactions():
+    transactions = Transaction.query.all()
+    return render_template('/transactions/index.html', transactions=transactions)
 
-@bp.route('/entries/<int:entry_id>')
-def show_entry(entry_id):
-    entry = Entry.query.get_or_404(entry_id)
-    return render_template('entries/show.html', entry=entry)
+@bp.route('/transactions/<int:transaction_id>')
+def show_transaction(transaction_id):
+    transaction = Transaction.query.get_or_404(transaction_id)
+    return render_template('transactions/show.html', transaction=transaction)
 
-@bp.route('/entries/add', methods=['GET', 'POST'])
-def add_entry():
+@bp.route('/transactions/add', methods=['GET', 'POST'])
+def add_transaction():
     if request.method == 'POST':
         description = request.form['description']
         amount = request.form['amount']
-        entry_type = request.form['entry_type']
+        transaction_type = request.form['transaction_type']
         category_id = request.form['category']
-        date = datetime.strptime(request.form['date'], '%Y-%m-%d').date()
-        month = request.args.get('month', get_current_month())
-        category = Category.query.get(category_id)
-        entry = Entry(description = description, amount = amount, entry_type = entry_type, category = category, month = month, date=date)
-        db.session.add(entry)
+        date = datetime.strptime(request.form['date'], '%Y-%m-%d').replace(tzinfo=timezone.utc)
+        transaction = Transaction(description=description, amount=amount, transaction_type=transaction_type, category_id=category_id, date=date)
+        db.session.add(transaction)
         db.session.commit()
-        return redirect(url_for('routes.index_entries'))
+        return redirect(url_for('routes.index_transactions'))
     else:
         categories = Category.query.all()
-        return render_template('entries/add.html', categories=categories)
+        return render_template('transactions/add.html', categories=categories)
 
-@bp.route('/entries/<int:entry_id>/edit', methods=['GET', 'POST'])
-def edit_entry(entry_id):
-    entry = Entry.query.get_or_404(entry_id)
+@bp.route('/transactions/<int:transaction_id>/edit', methods=['GET', 'POST'])
+def edit_transaction(transaction_id):
+    transaction = Transaction.query.get_or_404(transaction_id)
     if request.method == 'POST':
-        entry.description = request.form['description']
-        entry.amount = request.form['amount']
-        entry.entry_type = request.form['entry_type']
-        entry.category = request.form['category']
-        entry.date = datetime.strptime(request.form['date'], '%Y-%m-%d').date()
+        transaction.description = request.form['description']
+        transaction.amount = request.form['amount']
+        transaction.transaction_type = request.form['transaction_type']
+        transaction.category = request.form['category']
+        transaction.date = datetime.strptime(request.form['date'], '%Y-%m-%d').replace(tzinfo=timezone.utc)
         db.session.commit()
-        flash('Entry updated successfully', 'success')
-        return redirect(url_for('routes.index_entries'))
+        flash('Transaction updated successfully', 'success')
+        return redirect(url_for('routes.index_transactions'))
     else:
-        return render_template('entries/edit.html', entry=entry)
+        return render_template('transactions/edit.html', transaction=transaction)
 
-@bp.route('/entries/<int:entry_id>/delete', methods=['POST'])
-def delete_entry(entry_id):
-    entry = Entry.query.get_or_404(entry_id)
-    db.session.delete(entry)
+@bp.route('/transactions/<int:transaction_id>/delete', methods=['POST'])
+def delete_transaction(transaction_id):
+    Transaction = Transaction.query.get_or_404(transaction_id)
+    db.session.delete(Transaction)
     db.session.commit()
-    flash('Entry deleted successfully', 'success')
-    return redirect(url_for('routes.index_entries'))
+    flash('Transaction deleted successfully', 'success')
+    return redirect(url_for('routes.index_transactions'))
 
 
 # budgets routes

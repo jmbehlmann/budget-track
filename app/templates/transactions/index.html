@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div>
+    <h1>Entries Index</h1>
+    <a href="{{ url_for('routes.add_transaction') }}">Add transaction</a>
+    <ul>
+        {% for transaction in entries %}
+            <li>
+                <span>
+                  {{ transaction.description }}:
+                  ${{ transaction.amount }}
+                  {{ transaction.category.name }}
+                  ({{ transaction.transaction_type }})
+                  {{ transaction.date}}
+                  <a href="{{ url_for('routes.edit_transaction', transaction_id=transaction.id) }}">Edit</a>
+                </span>
+            </li>
+        {% else %}
+            <li>No transactions found.</li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}
