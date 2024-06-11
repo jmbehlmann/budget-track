@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from datetime import datetime, UTC
-from .models import db, Entry, Category
+from datetime import datetime, timezone
+from .models import db, Transaction, Category
 
 # TODO rename entries to transactions
 # TODO
@@ -11,14 +11,14 @@ from .models import db, Entry, Category
 bp = Blueprint('routes', __name__)
 
 def get_current_month():
-    return datetime.now().strftime('%Y-%m')
+    return datetime.now(timezone.utc).strftime('%Y-%m')
 
 
 @bp.route('/')
 def home():
     month = request.args.get('month', get_current_month())
-    entries = Entry.query.all()
-    return render_template('home.html', entries=entries, month=month)
+    transactions = Transaction.query.filter(db.func.strftime('%Y-%m', Transaction.date) == month).all()
+    return render_template('home.html', transactions=transactions, month=month)
 
 
 # entries routes
