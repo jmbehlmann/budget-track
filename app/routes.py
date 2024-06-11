@@ -2,8 +2,8 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 from datetime import datetime, timezone
 from .models import db, Transaction, Category
 
-# TODO
-# TODO
+# TODO budget routes
+# TODO home layout
 # TODO
 
 
