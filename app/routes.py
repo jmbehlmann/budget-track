@@ -2,8 +2,8 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 from datetime import datetime, UTC
 from .models import db, Entry, Category
 
-# TODO do entries need a show action?
-# TODO add date to entries
+# TODO rename entries to transactions
+# TODO
 # TODO
 
 
