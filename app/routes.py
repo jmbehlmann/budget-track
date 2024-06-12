@@ -4,7 +4,7 @@ from .models import db, Transaction, Category
 
 # TODO budget routes
 # TODO home layout
-# TODO
+# TODO maybe make function for handling forms for add and edit transactions
 
 
 
@@ -75,6 +75,11 @@ def delete_transaction(transaction_id):
 
 
 # budgets routes
+
+@bp.route('/budgets/add', methods=['GET'])
+def add_budget():
+
+    return render_template('budgets/add.html')
 
 # categories routes
 

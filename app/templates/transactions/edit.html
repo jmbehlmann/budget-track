@@ -27,7 +27,7 @@
       <label for="category">Category:</label>
       <select id="category" name="category">
         {% for category in categories %}
-          <option value="{{ category.id }}" {% if category.id == transaction.category.id %}selected{% endif %}>{{ category.name }}</option>
+          <option value="{{ category.id }}" {% if category.id == transaction.category_id %}selected{% endif %}>{{ category.name }}</option>
         {% endfor %}
       </select>
     </div>
@@ -36,9 +36,9 @@
     </div>
   </form>
   <div>
-  <form action="{{ url_for('routes.delete_transaction', transaction_id=transaction.id) }}" method="POST">
-    <button type="submit">Delete</button>
-  </form>
-</div>
+    <form action="{{ url_for('routes.delete_transaction', transaction_id=transaction.id) }}" method="POST">
+      <button type="submit">Delete</button>
+    </form>
+  </div>
 </div>
 {% endblock %}
