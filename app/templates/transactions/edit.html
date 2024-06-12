@@ -3,7 +3,7 @@
 {% block content %}
 <div>
   <h2>Edit Transaction</h2>
-  <form method="POST" action="{{ url_for('routes.edit_transaction', transaction_id=transaction.id) }}">
+  <form method="POST" action="{{ url_for('transactions.edit_transaction', transaction_id=transaction.id) }}">
     <div>
       <label for="description">Description:</label>
       <input type="text" id="description" name="description" value="{{ transaction.description }}">
@@ -36,7 +36,7 @@
     </div>
   </form>
   <div>
-    <form action="{{ url_for('routes.delete_transaction', transaction_id=transaction.id) }}" method="POST">
+    <form action="{{ url_for('transactions.delete_transaction', transaction_id=transaction.id) }}" method="POST">
       <button type="submit">Delete</button>
     </form>
   </div>

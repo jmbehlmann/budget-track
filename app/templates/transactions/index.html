@@ -4,7 +4,7 @@
 
 <div>
     <h1>transactions Index</h1>
-    <a href="{{ url_for('routes.add_transaction') }}">Add transaction</a>
+    <a href="{{ url_for('transactions.add_transaction') }}">Add transaction</a>
     <ul>
         {% for transaction in transactions %}
             <li>
@@ -14,7 +14,7 @@
                   {{ transaction.category.name }}
                   ({{ transaction.transaction_type }})
                   {{ transaction.date}}
-                  <a href="{{ url_for('routes.edit_transaction', transaction_id=transaction.id) }}">Edit</a>
+                  <a href="{{ url_for('transactions.edit_transaction', transaction_id=transaction.id) }}">Edit</a>
                 </span>
             </li>
         {% else %}

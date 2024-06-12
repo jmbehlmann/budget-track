@@ -4,7 +4,7 @@
 <div>
     <h1>Monthly Budget for {{ month }}</h1>
 
-    <form method="GET" action="{{ url_for('routes.home') }}">
+    <form method="GET" action="{{ url_for('home.home') }}">
         <label for="month">Select Month:</label>
         <input type="month" id="month" name="month" value="{{ month }}">
         <button type="submit">View</button>

@@ -11,8 +11,19 @@ def create_app():
 
     db.init_app(app)
 
-    from . import routes, models
-    app.register_blueprint(routes.bp)
+    from .home import home_bp
+    from .transactions import transactions_bp
+    from .budgets import budgets_bp
+    from .categories import categories_bp
+
+    app.register_blueprint(home_bp)
+    app.register_blueprint(transactions_bp, url_prefix='/transactions')
+    app.register_blueprint(budgets_bp, url_prefix='/budgets')
+    app.register_blueprint(categories_bp, url_prefix='/categories')
+
+
+    # from . import routes, models
+    # app.register_blueprint(routes.bp)
 
     @app.cli.command("init-db")
     def init_db():

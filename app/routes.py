@@ -8,7 +8,7 @@ from .models import db, Transaction, Category
 
 
 
-bp = Blueprint('routes', __name__)
+# bp = Blueprint('routes', __name__)
 
 # def get_current_month():
 #     return datetime.now(timezone.utc).strftime('%Y-%m')
@@ -76,34 +76,34 @@ bp = Blueprint('routes', __name__)
 
 # budgets routes
 
-@bp.route('/budgets/add', methods=['GET'])
-def add_budget():
+# @bp.route('/budgets/add', methods=['GET'])
+# def add_budget():
 
-    return render_template('budgets/add.html')
+#     return render_template('budgets/add.html')
 
-# categories routes
+# # categories routes
 
-@bp.route('/categories')
-def index_categories():
-    categories = Category.query.all()
-    return render_template('/categories/index.html', categories=categories)
+# @bp.route('/categories')
+# def index_categories():
+#     categories = Category.query.all()
+#     return render_template('/categories/index.html', categories=categories)
 
-@bp.route('/categories/add', methods=['POST'])
-def add_category():
-    if request.method == 'POST':
-        name = request.form['name']
-        category = Category(name = name)
-        db.session.add(category)
-        db.session.commit()
-        return redirect(url_for('routes.index_categories'))
-    else:
-        return render_template('categories/add.html')
+# @bp.route('/categories/add', methods=['POST'])
+# def add_category():
+#     if request.method == 'POST':
+#         name = request.form['name']
+#         category = Category(name = name)
+#         db.session.add(category)
+#         db.session.commit()
+#         return redirect(url_for('routes.index_categories'))
+#     else:
+#         return render_template('categories/add.html')
 
-@bp.route('/categories/<int:category_id>/delete', methods=['POST'])
-def delete_category(category_id):
-    category = Category.query.get_or_404(category_id)
-    db.session.delete(category)
-    db.session.commit()
-    flash('Category deleted successfully', 'success')
-    return redirect(url_for('routes.index_categories'))
+# @bp.route('/categories/<int:category_id>/delete', methods=['POST'])
+# def delete_category(category_id):
+#     category = Category.query.get_or_404(category_id)
+#     db.session.delete(category)
+#     db.session.commit()
+#     flash('Category deleted successfully', 'success')
+#     return redirect(url_for('routes.index_categories'))
 

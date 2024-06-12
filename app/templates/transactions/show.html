@@ -20,10 +20,10 @@
     <span>{{ transaction.month }}</span>
   </div>
   <div>
-    <a href="{{ url_for('routes.edit_transaction', transaction_id=transaction.id) }}">Edit</a>
+    <a href="{{ url_for('transactions.edit_transaction', transaction_id=transaction.id) }}">Edit</a>
   </div>
   <div>
-    <a href="{{ url_for('routes.index_transactions') }}">Back to transactions</a>
+    <a href="{{ url_for('transactions.index_transactions') }}">Back to transactions</a>
   </div>
 </div>
 {% endblock %}

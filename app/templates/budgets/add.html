@@ -3,7 +3,7 @@
 {% block content %}
 <div>
   <h2>Add Budget</h2>
-  <form method="POST" action="{{ url_for('routes.add_budget') }}">
+  <form method="POST" action="{{ url_for('budgets.add_budget') }}">
     <div>
       <label for="category_name">Category Name:</label>
       <input type="text" id="category_name" name="category_name" required>
