@@ -6,7 +6,7 @@
   <ul>
     {% for budget in budgets %}
       <li>
-        {{ budget.category.name }}
+        {{ budget.category.name }}: {{ budget.amount }}
       </li>
     {% else %}
       <li>No budgets found.</li>

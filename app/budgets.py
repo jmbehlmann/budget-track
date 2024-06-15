@@ -23,3 +23,11 @@ def add_budget():
     else:
         categories = Category.query.all()
         return render_template('budgets/add.html', categories=categories)
+
+@budgets_bp.route('/<int:budget_id>/delete', methods=['POST'])
+def delete_budget(budget_id):
+    budget = Budget.query.get_or_404(budget_id)
+    db.session.delete(budget)
+    db.session.commit()
+    flash('Budget deleted successfully', 'success')
+    return redirect(url_for('categories.index_categories'))
