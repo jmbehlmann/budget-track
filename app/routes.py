@@ -3,6 +3,7 @@ from datetime import datetime, timezone
 from .models import db, Transaction, Category
 
 # TODO budget routes
+# TODO does category need a month
 # TODO home layout
 # TODO maybe make function for handling forms for add and edit transactions
 
