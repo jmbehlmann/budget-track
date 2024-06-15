@@ -30,4 +30,4 @@ def delete_budget(budget_id):
     db.session.delete(budget)
     db.session.commit()
     flash('Budget deleted successfully', 'success')
-    return redirect(url_for('categories.index_categories'))
+    return redirect(url_for('budgets.index_budgets'))
