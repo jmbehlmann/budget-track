@@ -27,7 +27,7 @@ def add_transaction():
         transaction = Transaction(description=description, amount=amount, transaction_type=transaction_type, category_id=category_id, date=date)
         db.session.add(transaction)
         db.session.commit()
-        return redirect(url_for('routes.index_transactions'))
+        return redirect(url_for('transactions.index_transactions'))
     else:
         categories = Category.query.all()
         return render_template('transactions/add.html', categories=categories)
@@ -43,7 +43,7 @@ def edit_transaction(transaction_id):
         transaction.date = datetime.strptime(request.form['date'], '%Y-%m-%d').replace(tzinfo=timezone.utc)
         db.session.commit()
         flash('Transaction updated successfully', 'success')
-        return redirect(url_for('routes.index_transactions'))
+        return redirect(url_for('transactions.index_transactions'))
     else:
         categories = Category.query.all()
         return render_template('transactions/edit.html', transaction=transaction, categories=categories)
@@ -54,4 +54,4 @@ def delete_transaction(transaction_id):
     db.session.delete(transaction)
     db.session.commit()
     flash('Transaction deleted successfully', 'success')
-    return redirect(url_for('routes.index_transactions'))
+    return redirect(url_for('transactions.index_transactions'))

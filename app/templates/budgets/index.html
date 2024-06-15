@@ -3,5 +3,14 @@
 {% block content %}
 <div>
   <h2>Index Budget</h2>
+  <ul>
+    {% for budget in budgets %}
+      <li>
+        {{ budget.category.name }}
+      </li>
+    {% else %}
+      <li>No budgets found.</li>
+    {% endfor %}
+  </ul>
 </div>
 {% endblock %}

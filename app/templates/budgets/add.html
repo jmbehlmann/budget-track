@@ -5,12 +5,16 @@
   <h2>Add Budget</h2>
   <form method="POST" action="{{ url_for('budgets.add_budget') }}">
     <div>
-      <label for="category_name">Category Name:</label>
-      <input type="text" id="category_name" name="category_name" required>
+      <label for="category">Category:</label>
+      <select id="category" name="category">
+        {% for category in categories %}
+          <option value="{{ category.id }}">{{ category.name }}</option>
+        {% endfor %}
+      </select>
     </div>
     <div>
-      <label for="budget_amount">Budget Amount:</label>
-      <input type="number" step="0.01" id="budget_amount" name="budget_amount" required>
+      <label for="amount">Budget Amount:</label>
+      <input type="number" step="0.01" id="amount" name="amount" required>
     </div>
     <div>
       <label for="month">Month:</label>

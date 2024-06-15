@@ -17,7 +17,7 @@ def add_category():
         category = Category(name = name)
         db.session.add(category)
         db.session.commit()
-        return redirect(url_for('routes.index_categories'))
+        return redirect(url_for('categories.index_categories'))
     else:
         return render_template('categories/add.html')
 
@@ -27,4 +27,4 @@ def delete_category(category_id):
     db.session.delete(category)
     db.session.commit()
     flash('Category deleted successfully', 'success')
-    return redirect(url_for('routes.index_categories'))
+    return redirect(url_for('categories.index_categories'))
