@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request
 from datetime import datetime, timezone
-from .models import Transaction, db
+from .models import Transaction, Budget, db
 
 home_bp = Blueprint('home', __name__)
 
@@ -11,4 +11,5 @@ def get_current_month():
 def home():
     month = request.args.get('month', get_current_month())
     transactions = Transaction.query.filter(db.func.strftime('%Y-%m', Transaction.date) == month).all()
-    return render_template('home.html', transactions=transactions, month=month)
+    budgets = Budget.query.filter(Budget.month == month).all()
+    return render_template('home.html', transactions=transactions, month=month, budgets=budgets)

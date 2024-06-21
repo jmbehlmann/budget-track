@@ -16,5 +16,11 @@
             <li>{{ transaction.date.strftime('%Y-%m-%d') }} - {{ transaction.description }}: ${{ transaction.amount }} ({{ transaction.category.name }})</li>
         {% endfor %}
     </ul>
+    <h2>Budgets</h2>
+    <ul>
+        {% for budget in budgets %}
+            <li>test</li>
+        {% endfor %}
+    </ul>
 </div>
 {% endblock %}
