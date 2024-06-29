@@ -12,4 +12,13 @@ def home():
     month = request.args.get('month', get_current_month())
     transactions = Transaction.query.filter(db.func.strftime('%Y-%m', Transaction.date) == month).all()
     budgets = Budget.query.filter(Budget.month == month).all()
-    return render_template('home.html', transactions=transactions, month=month, budgets=budgets)
+    budget_info = []
+    for budget in budgets:
+        total_spent = sum(t.amount for t in transactions if t.category_id == budget.category_id)
+        remaining_budget = budget.amount - total_spent
+        budget_info.append({
+            'category': budget.category,
+            'amount': budget.amount,
+            'remaining_budget': remaining_budget
+        })
+    return render_template('home.html', transactions=transactions, month=month, budget_info=budget_info)

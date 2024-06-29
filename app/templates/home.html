@@ -12,8 +12,8 @@
 
     <h2>Budgets</h2>
     <ul>
-        {% for budget in budgets %}
-            <li>{{ budget.category.name }}: {{ budget.amount }}</li>
+        {% for budget in budget_info %}
+            <li>{{ budget.category.name }}: {{ budget.amount }} (Remaining: ${{ budget.remaining_budget }})</li>
         {% endfor %}
     </ul>
 
@@ -23,5 +23,6 @@
             <li>{{ transaction.date.strftime('%Y-%m-%d') }} - {{ transaction.description }}: ${{ transaction.amount }} ({{ transaction.category.name }})</li>
         {% endfor %}
     </ul>
+
 </div>
 {% endblock %}
