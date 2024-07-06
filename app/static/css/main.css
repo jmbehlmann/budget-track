@@ -2,13 +2,15 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    background-color: #007bbb;
     margin: 0;
     padding: 0;
 }
 
 h1, h2 {
     color: #333;
+    font-size: 24px;
+
 }
 
 div {
@@ -17,6 +19,7 @@ div {
     max-width: 800px;
     background-color: #fff;
     border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 form {
@@ -34,7 +37,7 @@ input[type="month"] {
 
 button {
     padding: 5px 10px;
-    background-color: #007bff;
+    background-color: #007bbb;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -52,11 +55,6 @@ ul {
 
 li {
     padding: 10px 0;
-    border-bottom: 1px solid #ddd;
-}
-
-li:last-child {
-    border-bottom: none;
 }
 
 /* home */
@@ -73,15 +71,6 @@ li:last-child {
     box-sizing: border-box;
 }
 
-/* .expenses {
-    border-right: 1px solid #ddd;
-} */
-
-.income {
-    padding-left: 10px;
-}
-
-
 /* Tables */
 
 table {
@@ -97,7 +86,7 @@ th, td {
 }
 
 th {
-    background-color: #007bff;
+    background-color: #007bbb;
     color: white;
 }
 
@@ -109,8 +98,56 @@ tr:hover {
     background-color: #ddd;
 }
 
-/* nav bar */
+/* Header styles */
+header {
+    background-color: #007bbb;
+    color: white;
+    /* padding: 10px 0; */
+}
+
+.header-content {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #007bbb;
+}
+
+.header-content h1 {
+    margin: 0;
+    font-size: 24px;
+    color: white;
+}
+
+/* Navigation styles */
+
+nav {
+    background-color: #007bbb;
+}
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
 
 nav li {
-  display: inline;
+    display: inline-block;
+}
+
+nav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+nav li a:hover:not(.active) {
+    background-color: #0056b3;
+}
+
+nav .active {
+    background-color: #007bbb;
 }
