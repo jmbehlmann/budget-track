@@ -4,12 +4,16 @@ from .models import db, Transaction, Category
 
 transactions_bp = Blueprint('transactions', __name__)
 
+def get_current_month():
+    return datetime.now(timezone.utc).strftime('%Y-%m')
+
 # transactions routes
 
 @transactions_bp.route('/')
 def index_transactions():
-    transactions = Transaction.query.all()
-    return render_template('/transactions/index.html', transactions=transactions)
+    month = request.args.get('month', get_current_month())
+    transactions = Transaction.query.filter(db.func.strftime('%Y-%m', Transaction.date) == month).all()
+    return render_template('/transactions/index.html', transactions=transactions, month=month)
 
 @transactions_bp.route('/<int:transaction_id>')
 def show_transaction(transaction_id):
