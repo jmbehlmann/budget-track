@@ -21,11 +21,24 @@
 
 
     <h2>Budgets</h2>
-    <ul>
+    <table>
+        <tr>
+            <th>Category</th>
+            <th>Planned</th>
+            <th>Actual</th>
+            <th>Difference</th>
+        </tr>
         {% for budget in budget_info %}
-            <li>{{ budget.category.name }}------ Planned: {{ budget.amount }} ----- Actual: {{budget.budget_total}} ------ (Difference: ${{ budget.budget_difference }})</li>
+            <tr>
+                <th>{{ budget.category.name }}</th>
+                <th>{{ budget.amount }}</th>
+                <th>{{ budget.budget_total }}</th>
+                <th>{{ budget.budget_difference }}</th>
+            </tr>
         {% endfor %}
-    </ul>
+
+    </table>
+
 
     <!-- <h2>Transactions</h2>
     <ul>
