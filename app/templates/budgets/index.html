@@ -9,6 +9,10 @@
         <input type="month" id="month" name="month" value="{{ month }}">
         <button type="submit">View</button>
     </form>
+
+    <a href="{{ url_for('budgets.add_budget') }}">Add budget</a>
+
+
   <ul>
     {% for budget in budgets %}
       <li>

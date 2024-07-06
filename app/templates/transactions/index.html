@@ -12,6 +12,7 @@
     </form>
 
     <a href="{{ url_for('transactions.add_transaction') }}">Add transaction</a>
+
     <ul>
         {% for transaction in transactions %}
             <li>
