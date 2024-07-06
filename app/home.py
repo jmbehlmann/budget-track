@@ -10,18 +10,26 @@ def get_current_month():
 @home_bp.route('/')
 def home():
     month = request.args.get('month', get_current_month())
-    transactions = Transaction.query.filter(db.func.strftime('%Y-%m', Transaction.date) == month).all()
+    expenses = Transaction.query.filter(
+        db.func.strftime('%Y-%m', Transaction.date) == month,
+        Transaction.transaction_type == 'expense'
+    ).all()
+    incomes = Transaction.query.filter(
+        db.func.strftime('%Y-%m', Transaction.date) == month,
+        Transaction.transaction_type == 'income'
+    ).all()
     budgets = Budget.query.filter(Budget.month == month).all()
     budget_info = []
     for budget in budgets:
-        budget_total = sum(t.amount for t in transactions if t.category_id == budget.category_id)
+        budget_total = sum(e.amount for e in expenses if e.category_id == budget.category_id)
         remaining_budget = budget.amount - budget_total
         budget_info.append({
             'category': budget.category,
             'amount': budget.amount,
             'remaining_budget': remaining_budget
         })
-    total_spent = sum(t.amount for t in transactions)
+    total_spent = sum(e.amount for e in expenses)
     total_planned = sum(b.amount for b in budgets)
+    total_income = sum(i.amount for i in incomes)
 
-    return render_template('home.html', transactions=transactions, month=month, budget_info=budget_info, total_spent=total_spent, total_planned=total_planned)
+    return render_template('home.html', expenses=expenses, month=month, budget_info=budget_info, total_spent=total_spent, total_planned=total_planned, total_income=total_income)
