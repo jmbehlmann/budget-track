@@ -22,11 +22,12 @@ def home():
     budget_info = []
     for budget in budgets:
         budget_total = sum(e.amount for e in expenses if e.category_id == budget.category_id)
-        remaining_budget = budget.amount - budget_total
+        budget_difference = budget.amount - budget_total
         budget_info.append({
             'category': budget.category,
             'amount': budget.amount,
-            'remaining_budget': remaining_budget
+            'budget_total': budget_total,
+            'budget_difference': budget_difference
         })
     total_spent = sum(e.amount for e in expenses)
     total_planned = sum(b.amount for b in budgets)
