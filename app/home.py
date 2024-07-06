@@ -22,5 +22,6 @@ def home():
             'remaining_budget': remaining_budget
         })
     total_spent = sum(t.amount for t in transactions)
+    total_planned = sum(b.amount for b in budgets)
 
-    return render_template('home.html', transactions=transactions, month=month, budget_info=budget_info, total_spent=total_spent)
+    return render_template('home.html', transactions=transactions, month=month, budget_info=budget_info, total_spent=total_spent, total_planned=total_planned)
