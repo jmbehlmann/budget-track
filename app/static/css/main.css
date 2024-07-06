@@ -12,12 +12,11 @@ h1, h2 {
 }
 
 div {
-    padding: 20px;
-    margin: 20px auto;
+    padding: 10px;
+    margin: 10px auto;
     max-width: 800px;
     background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 form {
@@ -59,6 +58,29 @@ li {
 li:last-child {
     border-bottom: none;
 }
+
+/* home */
+
+.budget-summary {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.budget-summary > div {
+    flex: 1;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* .expenses {
+    border-right: 1px solid #ddd;
+} */
+
+.income {
+    padding-left: 10px;
+}
+
 
 /* Tables */
 
