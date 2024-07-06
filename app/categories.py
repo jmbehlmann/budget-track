@@ -14,7 +14,8 @@ def index_categories():
 def add_category():
     if request.method == 'POST':
         name = request.form['name']
-        category = Category(name = name)
+        type = request.form['type']
+        category = Category(name=name, type=type)
         db.session.add(category)
         db.session.commit()
         return redirect(url_for('categories.index_categories'))
