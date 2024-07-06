@@ -1,14 +1,19 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
+from datetime import datetime, timezone
 from .models import db, Budget, Category
 
 budgets_bp = Blueprint('budgets', __name__)
+
+def get_current_month():
+    return datetime.now(timezone.utc).strftime('%Y-%m')
 
 # budgets routes
 
 @budgets_bp.route('/')
 def index_budgets():
-    budgets = Budget.query.all()
-    return render_template('budgets/index.html', budgets=budgets)
+    month = request.args.get('month', get_current_month())
+    budgets = Budget.query.filter(Budget.month == month).all()
+    return render_template('budgets/index.html', budgets=budgets, month=month)
 
 @budgets_bp.route('/add', methods=['GET', 'POST'])
 def add_budget():

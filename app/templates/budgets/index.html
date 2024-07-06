@@ -2,7 +2,13 @@
 
 {% block content %}
 <div>
-  <h2>Index Budget</h2>
+    <h1>Budgets for {{ month }}</h1>
+
+    <form method="GET" action="{{ url_for('budgets.index_budgets') }}">
+        <label for="month">Select Month:</label>
+        <input type="month" id="month" name="month" value="{{ month }}">
+        <button type="submit">View</button>
+    </form>
   <ul>
     {% for budget in budgets %}
       <li>
