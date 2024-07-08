@@ -10,14 +10,9 @@ def get_current_month():
 @home_bp.route('/')
 def home():
     month = request.args.get('month', get_current_month())
-    expenses = Transaction.query.filter(
-        db.func.strftime('%Y-%m', Transaction.date) == month,
-        Transaction.transaction_type == 'expense'
-    ).all()
-    incomes = Transaction.query.filter(
-        db.func.strftime('%Y-%m', Transaction.date) == month,
-        Transaction.transaction_type == 'income'
-    ).all()
+    transactions = Transaction.query.filter(db.func.strftime('%Y-%m', Transaction.date) == month).all()
+    expenses = [t for t in transactions if t.transaction_type == 'expense']
+    incomes = [t for t in transactions if t.transaction_type == 'income']
     budgets = Budget.query.filter(Budget.month == month).all()
     budget_info = []
     for budget in budgets:
@@ -33,4 +28,4 @@ def home():
     total_planned = sum(b.amount for b in budgets)
     total_income = sum(i.amount for i in incomes)
 
-    return render_template('home.html', expenses=expenses, month=month, budget_info=budget_info, total_spent=total_spent, total_planned=total_planned, total_income=total_income)
+    return render_template('home.html', expenses=expenses, month=month, budget_info=budget_info, total_spent=total_spent, total_planned=total_planned, total_income=total_income, transactions=transactions)
