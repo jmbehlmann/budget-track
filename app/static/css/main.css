@@ -59,7 +59,7 @@ li {
 /* home */
 
 .budget-summary {
-    display: flex;
+    /* display: flex; */
     justify-content: space-between;
     margin-bottom: 20px;
 }
