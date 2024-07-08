@@ -24,6 +24,10 @@
         </div>
     </div>
 
+    <div>
+        <canvas id="expensesChart"></canvas>
+    </div>
+
     <h2>Budgets</h2>
     <table>
         <thead>
@@ -68,4 +72,28 @@
         </tbody>
     </table>
 </div>
+
+<script>
+  const ctx = document.getElementById('expensesChart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['planned Expenses', 'Actual Expenses'],
+      datasets: [{
+        label: 'Expenses',
+        data: [{{ total_planned_expenses }}, {{ total_expenses}}],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
 {% endblock %}
