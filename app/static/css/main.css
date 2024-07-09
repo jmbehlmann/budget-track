@@ -24,10 +24,6 @@ div {
     border-radius: 8px;
 }
 
-/* a {
-  padding: 0px;
-} */
-
 form {
     margin-bottom: 20px;
 }
@@ -120,6 +116,7 @@ tr:hover {
 }
 
 /* Header styles */
+
 header {
     background-color: #007bbb;
     color: white;
@@ -143,6 +140,9 @@ header {
 .header-content a {
     color: white;
     text-decoration: none;
+    /* padding: .5em; */
+    padding-top: .5em;
+    padding-bottom: .5em;
 }
 
 /* Navigation styles */
