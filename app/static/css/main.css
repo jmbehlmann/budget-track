@@ -18,7 +18,7 @@ h3 {
 
 div {
     padding: 10px;
-    margin: 10px auto;
+    margin: 0px auto;
     max-width: 800px;
     background-color: #fff;
     border-radius: 8px;
@@ -55,9 +55,6 @@ ul {
     padding: 0;
 }
 
-li {
-    /* padding: 10px 0; */
-}
 
 /* home */
 
@@ -74,6 +71,7 @@ li {
 .expenses-summary {
   display: flex;
   height: 20vh;
+  margin-bottom: 1em;
   /* align-items: center; */
 }
 
@@ -120,7 +118,6 @@ tr:hover {
 header {
     background-color: #007bbb;
     color: white;
-    margin-top: 10px;
 }
 
 .header-content {
@@ -141,7 +138,6 @@ header {
 .header-content a {
     color: white;
     text-decoration: none;
-    /* padding: .5em; */
     padding-top: .5em;
     padding-bottom: .5em;
 }
