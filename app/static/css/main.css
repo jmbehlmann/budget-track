@@ -7,16 +7,15 @@ body {
     padding: 0px;
 }
 
-/* p {
-  margin-top: 1em;
-  margin-bottom: 1em;
-} */
+
 
 h1, h2 {
     color: #333;
     font-size: 24px;
-    padding: 0;
-    margin: 0px;
+}
+
+h3 {
+  margin: 0;
 }
 
 div {
@@ -65,29 +64,28 @@ li {
 /* home */
 
 .budget-summary {
-    /* display: flex; */
     justify-content: space-between;
 }
 
 .budget-summary > div {
-    flex: 1;
-    box-sizing: border-box;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  box-sizing: border-box;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .expenses-summary {
   display: flex;
   height: 20vh;
+  /* align-items: center; */
 }
 
 .expenses {
-    flex: 1;
+  flex: 1;
+  align-self: center;
 }
 
 .expenses-chart {
-    flex: 3;
-    /* padding-top: 40px; */
-    /* padding-bottom: 20px; */
+  flex: 3;
 }
 
 
