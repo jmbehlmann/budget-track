@@ -70,18 +70,19 @@ ul {
 
 .expenses-summary {
   display: flex;
-  height: 20vh;
   margin-bottom: 1em;
-  /* align-items: center; */
+  align-items: center;
 }
 
 .expenses {
   flex: 1;
   align-self: center;
+  padding: 0;
 }
 
 .expenses-chart {
   flex: 3;
+  height: 10vh;
 }
 
 
