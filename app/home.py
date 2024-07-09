@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from .models import Transaction, Budget, db
 
 home_bp = Blueprint('home', __name__)
@@ -7,9 +7,19 @@ home_bp = Blueprint('home', __name__)
 def get_current_month():
     return datetime.now(timezone.utc).strftime('%Y-%m')
 
+def get_previous_next_months(current_month):
+    date_obj = datetime.strptime(current_month, "%Y-%m")
+    first_day_current_month = date_obj.replace(day=1)
+
+    previous_month = (first_day_current_month - timedelta(days=1)).strftime("%Y-%m")
+    next_month = (first_day_current_month + timedelta(days=31)).replace(day=1).strftime("%Y-%m")
+
+    return previous_month, next_month
+
 @home_bp.route('/')
 def home():
     month = request.args.get('month', get_current_month())
+    previous_month, next_month = get_previous_next_months(month)
 
     transactions = Transaction.query.filter(db.func.strftime('%Y-%m', Transaction.date) == month).order_by(Transaction.date.desc()).all()
 
@@ -40,5 +50,7 @@ def home():
         budget_info=budget_info,
         total_expenses=total_expenses,
         total_income=total_income,
-        total_planned_expenses=total_planned_expenses
+        total_planned_expenses=total_planned_expenses,
+        previous_month=previous_month,
+        next_month=next_month
     )
