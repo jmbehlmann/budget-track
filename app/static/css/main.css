@@ -3,14 +3,20 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #007bbb;
-    margin: 0;
-    padding: 0;
+    margin: 0px;
+    padding: 0px;
 }
+
+/* p {
+  margin-top: 1em;
+  margin-bottom: 1em;
+} */
 
 h1, h2 {
     color: #333;
     font-size: 24px;
-
+    padding: 0;
+    margin: 0px;
 }
 
 div {
@@ -61,19 +67,30 @@ li {
 .budget-summary {
     /* display: flex; */
     justify-content: space-between;
-    margin-bottom: 20px;
 }
 
 .budget-summary > div {
     flex: 1;
-    padding: 10px;
     box-sizing: border-box;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.expenses {
+.expenses-summary {
   display: flex;
+  height: 20vh;
 }
+
+.expenses {
+    flex: 1;
+}
+
+.expenses-chart {
+    flex: 3;
+    /* padding-top: 40px; */
+    /* padding-bottom: 20px; */
+}
+
+
 
 /* Tables */
 

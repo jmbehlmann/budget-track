@@ -12,13 +12,13 @@
 
 
     <div class="budget-summary">
-        <div class="expenses">
-            <div>
+        <div class="expenses-summary">
+            <div class="expenses">
                 <h2>Expenses</h2>
                 <p>Planned: {{ total_planned_expenses }}</p>
                 <p>Actual: {{ total_expenses }}</p>
             </div>
-            <div>
+            <div class="expenses-chart">
                 <canvas id="expensesChart"></canvas>
             </div>
         </div>
@@ -94,7 +94,13 @@
         y: {
           beginAtZero: true
         }
-      }
+      },
+      plugins: {
+        legend: {
+            display: false
+        }
+      },
+      maintainAspectRatio: false
     }
   });
 </script>
