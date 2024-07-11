@@ -82,6 +82,7 @@ ul {
 
 .expenses-chart {
   flex: 3;
+  /* overflow: auto; */
   height: 10vh;
 }
 
