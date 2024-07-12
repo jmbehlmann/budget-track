@@ -25,55 +25,58 @@
         </div>
         <div class="income">
             <h3>Income</h3>
-            <!-- <p>Planned: ?</p> -->
+            <p>Planned: ?</p>
             <p>Actual: {{ total_income }}</p>
         </div>
     </div>
 
-
-    <h2>Budgets</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Category</th>
-                <th>Planned</th>
-                <th>Actual</th>
-                <th>Difference</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for budget in budget_info %}
+    <div class="budgets">
+        <h2>Budgets</h2>
+        <table>
+            <thead>
                 <tr>
-                    <td>{{ budget.category.name }}</td>
-                    <td>{{ budget.amount }}</td>
-                    <td>{{ budget.budget_total }}</td>
-                    <td>{{ budget.budget_difference }}</td>
+                    <th>Category</th>
+                    <th>Planned</th>
+                    <th>Actual</th>
+                    <th>Difference</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for budget in budget_info %}
+                    <tr>
+                        <td>{{ budget.category.name }}</td>
+                        <td>{{ budget.amount }}</td>
+                        <td>{{ budget.budget_total }}</td>
+                        <td>{{ budget.budget_difference }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
-    <h2>Transactions</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Description</th>
-                <th>Category</th>
-                <th>Amount</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for transaction in transactions %}
+    <div class="transactions">
+        <h2>Transactions</h2>
+        <table>
+            <thead>
                 <tr>
-                    <td>{{ transaction.date }}</td>
-                    <td>{{ transaction.description }}</td>
-                    <td>{{ transaction.category.name }}</td>
-                    <td>{{ transaction.amount }}</td>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Amount</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for transaction in transactions %}
+                    <tr>
+                        <td>{{ transaction.date }}</td>
+                        <td>{{ transaction.description }}</td>
+                        <td>{{ transaction.category.name }}</td>
+                        <td>{{ transaction.amount }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <script>
