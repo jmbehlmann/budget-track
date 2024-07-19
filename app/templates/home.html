@@ -8,6 +8,9 @@
         <label for="month">Select Month:</label>
         <input type="month" id="month" name="month" value="{{ month }}">
         <button type="submit">View</button>
+    </form>
+
+    <form method="GET" action="{{ url_for('home.home') }}">
         <button type="submit" name="month" value="{{ previous_month }}">Previous</button>
         <button type="submit" name="month" value="{{ next_month }}">Next</button>
     </form>
