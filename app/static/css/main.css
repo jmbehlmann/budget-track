@@ -216,8 +216,17 @@ nav .active {
   align-items: center;
 }
 
+/* budgets page  */
+
 .budgets-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+/* categories page  */
+.categories-add-category form {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
 }
