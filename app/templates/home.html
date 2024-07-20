@@ -17,6 +17,16 @@
     </div>
 
     <div class="budget-summary">
+        <div class="budget-overview">
+            <div>
+                <h3>Overview</h3>
+                <p>Income: {{ total_income }}</p>
+                <p>Expenses: {{ total_expenses }}</p>
+            </div>
+            <div class="overview-chart">
+                <canvas id="overviewChart"></canvas>
+            </div>
+        </div>
         <div class="expenses-summary">
             <div class="expenses">
                 <h3>Expenses</h3>
@@ -26,11 +36,6 @@
             <div class="expenses-chart">
                 <canvas id="expensesChart"></canvas>
             </div>
-        </div>
-        <div class="income">
-            <h3>Income</h3>
-            <p>Planned: ?</p>
-            <p>Actual: {{ total_income }}</p>
         </div>
     </div>
 
@@ -93,6 +98,35 @@
       datasets: [{
         label: 'Expenses',
         data: ["{{ total_planned_expenses }}", "{{ total_expenses }}"],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      },
+      plugins: {
+        legend: {
+            display: false
+        }
+      },
+      maintainAspectRatio: false
+    }
+  });
+
+  const ctxOverview = document.getElementById('overviewChart');
+
+  new Chart(ctxOverview, {
+    type: 'bar',
+    data: {
+      labels: ['Income', 'Expenses'],
+      datasets: [{
+        label: 'Amount',
+        data: ["{{ total_income }}", "{{ total_expenses }}"],
+        backgroundColor: ['#4CAF50', '#F44336'],
         borderWidth: 1
       }]
     },
