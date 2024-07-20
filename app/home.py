@@ -16,6 +16,10 @@ def get_previous_next_months(current_month):
 
     return previous_month, next_month
 
+def get_available_years():
+    years = db.session.query(db.func.distinct(db.func.strftime('%Y', Transaction.date))).all()
+    return [int(year[0]) for year in years]
+
 @home_bp.route('/')
 def home():
     month = request.args.get('month', get_current_month())
