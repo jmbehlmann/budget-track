@@ -5,13 +5,15 @@
 <div>
     <h1>Transactions for {{ month }}</h1>
 
-    <form method="GET" action="{{ url_for('transactions.index_transactions') }}">
-        <label for="month">Select Month:</label>
-        <input type="month" id="month" name="month" value="{{ month }}">
-        <button type="submit">View</button>
-    </form>
+    <div class="transactions-header">
+        <a href="{{ url_for('transactions.add_transaction') }}">Add transaction</a>
 
-    <a href="{{ url_for('transactions.add_transaction') }}">Add transaction</a>
+        <form method="GET" action="{{ url_for('transactions.index_transactions') }}">
+            <label for="month">Select Month:</label>
+            <input type="month" id="month" name="month" value="{{ month }}">
+            <button type="submit">View</button>
+        </form>
+    </div>
 
     <table>
         <thead>

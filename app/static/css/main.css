@@ -207,3 +207,11 @@ nav .active {
   background-color: #007bbb;
   color: white;
 }
+
+/* transactions page  */
+
+.transactions-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
