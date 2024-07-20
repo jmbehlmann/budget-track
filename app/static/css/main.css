@@ -176,3 +176,12 @@ nav li a:hover:not(.active) {
 nav .active {
     background-color: #007bbb;
 }
+
+/* footer styles */
+
+.footer-content {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #007bbb;
+  color: white;
+}
