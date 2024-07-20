@@ -24,18 +24,28 @@
   </form>
 
   <h2>Index Categories</h2>
-  <ul>
-    {% for category in categories %}
-      <li>
-        {{ category.name }}
-        <form method="POST" action="{{ url_for('categories.delete_category', category_id=category.id) }}" style="display: inline;">
-          <button type="submit" onclick="return confirm('Are you sure you want to delete {{ category.name }}?')">Delete</button>
-        </form>
-      </li>
-    {% else %}
-      <li>No categories found.</li>
-    {% endfor %}
-  </ul>
+    <div>
+      <table>
+          <thead>
+              <tr>
+                  <th>Category</th>
+                  <th>Delete</th>
+              </tr>
+          </thead>
+          <tbody>
+              {% for category in categories %}
+                  <tr>
+                      <td>{{ category.name }}</td>
+                      <td>
+                        <form method="POST" action="{{ url_for('categories.delete_category', category_id=category.id) }}" style="display: inline;">
+                        <button type="submit" onclick="return confirm('Are you sure you want to delete {{ category.name }}?')">Delete</button>
+                        </form>
+                      </td>
+                  </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+    </div>
 </div>
 
 {% endblock %}
