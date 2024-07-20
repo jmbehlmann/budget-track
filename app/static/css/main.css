@@ -86,6 +86,11 @@ ul {
   height: 10vh;
 }
 
+.month-select {
+  display: flex;
+  justify-content: space-between;
+}
+
 
 
 /* Tables */

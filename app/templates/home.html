@@ -4,16 +4,18 @@
 <div>
     <h1>Monthly Budget for {{ month }}</h1>
 
-    <form method="GET" action="{{ url_for('home.home') }}">
-        <label for="month">Select Month:</label>
-        <input type="month" id="month" name="month" value="{{ month }}">
-        <button type="submit">View</button>
-    </form>
+    <div class="month-select">
+        <form method="GET" action="{{ url_for('home.home') }}">
+            <label for="month">Select Month:</label>
+            <button type="submit" name="month" value="{{ previous_month }}">Previous</button>
+            <button type="submit" name="month" value="{{ next_month }}">Next</button>
+        </form>
 
-    <form method="GET" action="{{ url_for('home.home') }}">
-        <button type="submit" name="month" value="{{ previous_month }}">Previous</button>
-        <button type="submit" name="month" value="{{ next_month }}">Next</button>
-    </form>
+        <form method="GET" action="{{ url_for('home.home') }}">
+            <input type="month" id="month" name="month" value="{{ month }}">
+            <button type="submit">View</button>
+        </form>
+    </div>
 
     <div class="budget-summary">
         <div class="expenses-summary">
