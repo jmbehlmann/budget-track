@@ -2,7 +2,7 @@
 
 {% block content %}
 <div>
-    <h1>Monthly Budget for {{ month }}</h1>
+    <h1>Budget for {{ formatted_month }}</h1>
 
     <div class="month-select">
         <form method="GET" action="{{ url_for('home.home') }}">

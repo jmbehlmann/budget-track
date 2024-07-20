@@ -16,11 +16,15 @@ def get_previous_next_months(current_month):
 
     return previous_month, next_month
 
+def format_month(month_str):
+    return datetime.strptime(month_str, "%Y-%m").strftime("%B %Y")
+
 
 @home_bp.route('/')
 def home():
     month = request.args.get('month', get_current_month())
     previous_month, next_month = get_previous_next_months(month)
+    formatted_month = format_month(month)
 
     transactions = Transaction.query.filter(db.func.strftime('%Y-%m', Transaction.date) == month).order_by(Transaction.date.desc()).all()
 
@@ -53,5 +57,6 @@ def home():
         total_income=total_income,
         total_planned_expenses=total_planned_expenses,
         previous_month=previous_month,
-        next_month=next_month
+        next_month=next_month,
+        formatted_month=formatted_month
     )
