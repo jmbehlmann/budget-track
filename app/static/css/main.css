@@ -68,6 +68,23 @@ ul {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.budget-overview {
+  display: flex;
+  margin-bottom: 1em;
+  align-items: center;
+}
+
+.overview {
+  flex: 1;
+  align-self: center;
+  padding: 0;
+}
+
+.overview-chart {
+  flex: 2.12;
+  height: 10vh;
+}
+
 .expenses-summary {
   display: flex;
   margin-bottom: 1em;
@@ -85,6 +102,7 @@ ul {
   /* overflow: auto; */
   height: 10vh;
 }
+
 
 .month-select {
   display: flex;

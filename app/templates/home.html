@@ -18,7 +18,7 @@
 
     <div class="budget-summary">
         <div class="budget-overview">
-            <div>
+            <div class="overview">
                 <h3>Overview</h3>
                 <p>Income: {{ total_income }}</p>
                 <p>Expenses: {{ total_expenses }}</p>
@@ -89,9 +89,10 @@
 </div>
 
 <script>
-  const ctx = document.getElementById('expensesChart');
+  const ctxExpenses = document.getElementById('expensesChart');
+  const ctxOverview = document.getElementById('overviewChart');
 
-  new Chart(ctx, {
+  new Chart(ctxExpenses, {
     type: 'bar',
     data: {
       labels: ['Planned Expenses', 'Actual Expenses'],
@@ -117,7 +118,6 @@
     }
   });
 
-  const ctxOverview = document.getElementById('overviewChart');
 
   new Chart(ctxOverview, {
     type: 'bar',
@@ -125,7 +125,7 @@
       labels: ['Income', 'Expenses'],
       datasets: [{
         label: 'Amount',
-        data: ["{{ total_income }}", "{{ total_expenses }}"],
+        data: ['{{ total_income }}', '{{ total_expenses }}'],
         backgroundColor: ['#4CAF50', '#F44336'],
         borderWidth: 1
       }]
