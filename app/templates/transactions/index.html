@@ -6,9 +6,9 @@
     <h1>Transactions for {{ month }}</h1>
 
     <div class="transactions-header">
-        <form method="GET" action="{{ url_for('transactions.add_transaction') }}">
+        <a href="{{ url_for('transactions.add_transaction') }}">
             <button type="submit">Add Transaction</button>
-        </form>
+        </a>
 
         <form method="GET" action="{{ url_for('transactions.index_transactions') }}">
             <label for="month">Select Month:</label>

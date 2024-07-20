@@ -215,3 +215,9 @@ nav .active {
   justify-content: space-between;
   align-items: center;
 }
+
+.budgets-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
