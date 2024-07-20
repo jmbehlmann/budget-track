@@ -9,20 +9,20 @@
   <div class="categories-add-category">
     <form method="POST" action="{{ url_for('categories.add_category') }}">
       <h3>Add Category</h3>
-      <div>
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name">
-      </div>
-      <div>
-        <label for="type">Type:</label>
-        <select id="type" name="type">
-          <option value="expense">Expense</option>
-          <option value="income">Income</option>
-        </select>
-      </div>
-      <div>
-        <button type="submit">Submit</button>
-      </div>
+        <div>
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name">
+        </div>
+        <div>
+          <label for="type">Type:</label>
+          <select id="type" name="type">
+            <option value="expense">Expense</option>
+            <option value="income">Income</option>
+          </select>
+        </div>
+        <div>
+          <button type="submit">Submit</button>
+        </div>
     </form>
   </div>
 
