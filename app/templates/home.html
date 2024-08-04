@@ -20,8 +20,8 @@
         <div class="budget-overview">
             <div class="overview">
                 <h3>Overview</h3>
-                <p>Income: {{ total_income }}</p>
-                <p>Expenses: {{ total_expenses }}</p>
+                <p>Income: {{ total_income | safe }}</p>
+                <p>Expenses: {{ total_expenses | safe }}</p>
             </div>
             <div class="overview-chart">
                 <canvas id="overviewChart"></canvas>
@@ -30,8 +30,8 @@
         <div class="expenses-summary">
             <div class="expenses">
                 <h3>Expenses</h3>
-                <p>Planned: {{ total_planned_expenses }}</p>
-                <p>Actual: {{ total_expenses }}</p>
+                <p>Planned: {{ total_planned_expenses | safe }}</p>
+                <p>Actual: {{ total_expenses | safe }}</p>
             </div>
             <div class="expenses-chart">
                 <canvas id="expensesChart"></canvas>
@@ -54,9 +54,9 @@
                 {% for budget in budget_info %}
                     <tr>
                         <td>{{ budget.category.name }}</td>
-                        <td>{{ budget.amount }}</td>
-                        <td>{{ budget.budget_total }}</td>
-                        <td>{{ budget.budget_difference }}</td>
+                        <td>{{ budget.amount | safe }}</td>
+                        <td>{{ budget.budget_total | safe }}</td>
+                        <td>{{ budget.budget_difference | safe }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -80,7 +80,7 @@
                         <td>{{ transaction.date }}</td>
                         <td>{{ transaction.description }}</td>
                         <td>{{ transaction.category.name }}</td>
-                        <td>{{ transaction.amount }}</td>
+                        <td>{{ transaction.amount | safe }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
