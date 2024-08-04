@@ -9,7 +9,6 @@ This is a simple Flask-based application to track monthly budgets and expenses. 
 
     ```bash
     git clone https://github.com/jmbehlmann/budget-track.git
-    cd monthly-budget-app
     ```
 
 2. **Create and activate a virtual environment:**
@@ -36,7 +35,7 @@ This is a simple Flask-based application to track monthly budgets and expenses. 
 5. **Run the application:**
 
     ```bash
-    flask run
+    python3 run.py
     ```
 
 6. **Open your browser and navigate to:**
@@ -59,17 +58,6 @@ This is a simple Flask-based application to track monthly budgets and expenses. 
 
     Use the month picker to select a specific month and view the budget summary for that month.
 
-## Project Structure
-
-- **app**: Contains the main application code.
-  - **models.py**: Defines the database models for transactions and budgets.
-  - **routes.py**: Defines the application routes and view functions.
-- **templates**: Contains the HTML templates.
-  - **base.html**: Base template.
-  - **home.html**: Home page template.
-- **static**: Contains static files like CSS and JavaScript.
-  - **styles.css**: Custom CSS styles.
-- **migrations**: Database migration files.
 
 ## Contributing
 
