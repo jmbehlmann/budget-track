@@ -54,9 +54,9 @@
                 {% for budget in budget_info %}
                     <tr>
                         <td>{{ budget.category.name }}</td>
-                        <td>{{ budget.amount | safe }}</td>
-                        <td>{{ budget.budget_total | safe }}</td>
-                        <td>{{ budget.budget_difference | safe }}</td>
+                        <td>${{ budget.amount | safe }}</td>
+                        <td>${{ budget.budget_total | safe }}</td>
+                        <td>${{ budget.budget_difference | safe }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

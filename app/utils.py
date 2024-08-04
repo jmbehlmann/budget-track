@@ -35,7 +35,7 @@ def format_transactions(transactions):
 def format_budget_info(budgets, expenses):
     formatted_budget_info = []
     for budget in budgets:
-        budget_total = sum(float(e['amount']) for e in expenses if e['category'].id == budget.category_id)
+        budget_total = sum(e.amount for e in expenses if e.category_id == budget.category_id)
         budget_difference = budget.amount - budget_total
         formatted_budget_info.append({
             'category': budget.category,
