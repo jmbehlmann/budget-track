@@ -39,14 +39,14 @@ def home():
         budget_difference = budget.amount - budget_total
         budget_info.append({
             'category': budget.category,
-            'amount': budget.amount,
-            'budget_total': budget_total,
-            'budget_difference': budget_difference
+            'amount': f"{budget.amount:.2f}",
+            'budget_total': f"{budget_total:.2f}",
+            'budget_difference': f"{budget_difference:.2f}"
         })
 
-    total_expenses = sum(e.amount for e in expenses)
-    total_planned_expenses = sum(b.amount for b in budgets)
-    total_income = sum(i.amount for i in incomes)
+    total_expenses = f"{sum(e.amount for e in expenses):.2f}"
+    total_planned_expenses = f"{sum(b.amount for b in budgets):.2f}"
+    total_income = f"{sum(i.amount for i in incomes):.2f}"
 
     return render_template(
         'home.html',
