@@ -15,6 +15,9 @@ def get_previous_next_months(current_month):
 def format_month(month_str):
     return datetime.strptime(month_str, "%Y-%m").strftime("%B %Y")
 
+def format_date(date):
+    return date.strftime('%B %-d')
+
 def format_transactions(transactions):
     formatted_transactions = [
         {

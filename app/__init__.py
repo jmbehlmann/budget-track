@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from .utils import format_date
 
 db = SQLAlchemy()
 
@@ -8,6 +9,8 @@ def create_app():
     app.config.from_pyfile('../instance/config.py')
 
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../instance/budget.db'
+
+    app.jinja_env.filters['format_date'] = format_date
 
     db.init_app(app)
 

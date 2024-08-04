@@ -77,10 +77,10 @@
             <tbody>
                 {% for transaction in transactions %}
                     <tr>
-                        <td>{{ transaction.date }}</td>
+                        <td>{{ transaction.date | format_date}}</td>
                         <td>{{ transaction.description }}</td>
                         <td>{{ transaction.category.name }}</td>
-                        <td>{{ transaction.amount | safe }}</td>
+                        <td>${{ transaction.amount | safe }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
