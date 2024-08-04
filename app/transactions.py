@@ -1,30 +1,16 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from datetime import datetime, timezone
 from .models import db, Transaction, Category
+from .utils import get_current_month, format_transactions
 
 transactions_bp = Blueprint('transactions', __name__)
-
-def get_current_month():
-    return datetime.now(timezone.utc).strftime('%Y-%m')
-
-# transactions routes
 
 @transactions_bp.route('/')
 def index_transactions():
     month = request.args.get('month', get_current_month())
     transactions = Transaction.query.filter(db.func.strftime('%Y-%m', Transaction.date) == month).all()
 
-    formatted_transactions = [
-        {
-            'id': t.id,
-            'description': t.description,
-            'amount': f"{t.amount:.2f}",
-            'transaction_type': t.transaction_type,
-            'category': t.category,
-            'date': t.date
-        }
-        for t in transactions
-    ]
+    formatted_transactions = format_transactions(transactions)
 
     return render_template('/transactions/index.html', transactions=formatted_transactions, month=month)
 

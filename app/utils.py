@@ -1,3 +1,20 @@
+from datetime import datetime, timezone, timedelta
+
+def get_current_month():
+    return datetime.now(timezone.utc).strftime('%Y-%m')
+
+def get_previous_next_months(current_month):
+    date_obj = datetime.strptime(current_month, "%Y-%m")
+    first_day_current_month = date_obj.replace(day=1)
+
+    previous_month = (first_day_current_month - timedelta(days=1)).strftime("%Y-%m")
+    next_month = (first_day_current_month + timedelta(days=31)).replace(day=1).strftime("%Y-%m")
+
+    return previous_month, next_month
+
+def format_month(month_str):
+    return datetime.strptime(month_str, "%Y-%m").strftime("%B %Y")
+
 def format_transactions(transactions):
     formatted_transactions = [
         {
