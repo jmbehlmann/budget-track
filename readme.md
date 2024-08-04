@@ -59,14 +59,6 @@ This is a simple Flask-based application to track monthly budgets and expenses. 
     Use the month picker to select a specific month and view the budget summary for that month.
 
 
-## Contributing
-
-1. Fork the repository.
-2. Create a new branch for your feature or bugfix.
-3. Commit your changes.
-4. Push to your branch.
-5. Create a new Pull Request.
-
 ## License
 
 This project is licensed under the MIT License.
