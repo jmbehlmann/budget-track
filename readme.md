@@ -1,6 +1,6 @@
 # Monthly Budget App
 
-This is a simple Flask-based application to track monthly budgets and expenses. It provides an interface to view transactions, planned and actual expenses, income, and budget summaries for each month. Users can navigate between months using "Previous" and "Next" buttons.
+This is a simple Flask-based application to track monthly budgets and expenses. It provides an interface to view transactions, planned and actual expenses, income, and budget summaries for each month.
 
 
 ## Installation
