@@ -217,6 +217,10 @@ nav .active {
   align-items: center;
 }
 
+.amount {
+  text-align: right;
+}
+
 /* budgets page  */
 
 .budgets-header {
