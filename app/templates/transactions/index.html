@@ -34,7 +34,7 @@
                         <td>{{ transaction.date | format_date}}</td>
                         <td>{{ transaction.description }}</td>
                         <td>{{ transaction.category.name }}</td>
-                        <td class="amount">{{ transaction.amount }}</td>
+                        <td class="amount">{{ transaction.amount }}&#8199;&#8199;&#8199;&#8199;</td>
                         <td>{{ transaction.transaction_type }}</td>
                         <td><a href="{{ url_for('transactions.edit_transaction', transaction_id=transaction.id) }}">Edit</a></td>
                     </tr>
